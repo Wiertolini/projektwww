@@ -57,25 +57,46 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 4. Zaklęcia - dane statyczne
+    // 4. Zaklęcia - rozszerzone dane
     const spellsData = {
         defensive: [
             { name: "Protego", description: "Tworzy magiczną tarczę odbijającą zaklęcia" },
             { name: "Expecto Patronum", description: "Przywołuje patronusa do obrony przed dementorami" },
             { name: "Protego Maxima", description: "Silniejsza wersja zaklęcia Protego" },
-            { name: "Repello Inimicum", description: "Odpycha intruzów od chronionego obszaru" }
+            { name: "Repello Inimicum", description: "Odpycha intruzów od chronionego obszaru" },
+            { name: "Fianto Duri", description: "Wzmacnia istniejące bariery ochronne" },
+            { name: "Salvio Hexia", description: "Chroni przed złymi zaklęciami" },
+            { name: "Expelliarmus", description: "Rozbraja przeciwnika" }
         ],
         offensive: [
             { name: "Avada Kedavra", description: "Śmiertelne zaklęcie, powoduje natychmiastową śmierć" },
             { name: "Crucio", description: "Zaklęcie tortur, powoduje ekstremalny ból" },
             { name: "Imperio", description: "Daje całkowitą kontrolę nad ofiarą" },
-            { name: "Sectumsempra", description: "Powoduje głębokie cięcia na ciele ofiary" }
+            { name: "Sectumsempra", description: "Powoduje głębokie cięcia na ciele ofiary" },
+            { name: "Confringo", description: "Powoduje eksplozję celu" },
+            { name: "Reducto", description: "Niszczy przedmioty na które jest rzucone" }
         ],
         utility: [
             { name: "Lumos", description: "Tworzy światło na końcu różdżki" },
             { name: "Accio", description: "Przyciąga przedmioty z odległości" },
             { name: "Alohomora", description: "Otwiera zamknięte drzwi i kłódki" },
-            { name: "Episkey", description: "Leczy drobne urazy i skaleczenia" }
+            { name: "Episkey", description: "Leczy drobne urazy i skaleczenia" },
+            { name: "Wingardium Leviosa", description: "Unosi przedmioty w powietrzu" },
+            { name: "Reparo", description: "Naprawia uszkodzone przedmioty" },
+            { name: "Aguamenti", description: "Tworzy strumień wody" },
+            { name: "Incendio", description: "Wytwarza ogień" }
+        ],
+        transfiguration: [
+            { name: "Vera Verto", description: "Zamienia zwierzęta w kielichy" },
+            { name: "Draconifors", description: "Zamienia przedmioty w smoki" },
+            { name: "Lapifors", description: "Zamienia przedmioty w króliki" },
+            { name: "Avifors", description: "Zamienia przedmioty w ptaki" }
+        ],
+        charms: [
+            { name: "Petrificus Totalus", description: "Paraliżuje ofiarę" },
+            { name: "Rictusempra", description: "Wywołuje niekontrolowany śmiech" },
+            { name: "Tarantallegra", description: "Wywołuje niekontrolowany taniec" },
+            { name: "Serpensortia", description: "Przywołuje węża" }
         ]
     };
 
@@ -92,15 +113,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.querySelectorAll('.accordion-content').forEach(item => {
                     if (item !== content) {
                         item.classList.remove('active');
+                        item.previousElementSibling.classList.remove('active');
                     }
                 });
                 
                 // Otwórz/zamknij aktualny akordeon
-                if (!isActive) {
+                btn.classList.toggle('active');
+                content.classList.toggle('active');
+                
+                // Załaduj zawartość tylko jeśli akordeon jest otwierany i jest pusty
+                if (!isActive && content.innerHTML === '') {
                     loadSpellsContent(content, index);
                 }
-                content.classList.toggle('active');
             });
+            
+            // Otwórz pierwszy akordeon domyślnie
+            if (index === 0) {
+                btn.click();
+            }
         });
     }
 
@@ -119,6 +149,14 @@ document.addEventListener('DOMContentLoaded', () => {
             case 2:
                 category = 'utility';
                 title = 'Użytkowe';
+                break;
+            case 3:
+                category = 'transfiguration';
+                title = 'Transmutacyjne';
+                break;
+            case 4:
+                category = 'charms';
+                title = 'Uroki';
                 break;
             default:
                 return;
