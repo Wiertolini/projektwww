@@ -24,7 +24,8 @@ async function fetchCharacters() {
              'Bellatrix Lestrange', 'Lord Voldemort'].includes(character.name)
         );
 
-        return data.map(character => ({
+        // Mapuj tylko przefiltrowane postaci (mainCharacters zamiast data)
+        return mainCharacters.map(character => ({
             id: character.id || Math.random().toString(36).substr(2, 9),
             name: character.name || 'Unknown character',
             house: character.house || 'No house',
