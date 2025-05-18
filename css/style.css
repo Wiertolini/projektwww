@@ -1,4 +1,3 @@
-
 :root {
     --primary-color: #740001;
     --secondary-color: #d3a625;
@@ -9,6 +8,15 @@
     --font-main: 'Montserrat', sans-serif;
     --font-heading: 'Harry Potter', 'Times New Roman', serif;
     --transition: all 0.3s ease;
+}
+
+body.dark-mode {
+    --text-color: #f0f0f0;
+    --bg-color: #121212;
+    --light-gray: #1e1e1e;
+    --dark-gray: #aaa;
+    --primary-color: #ff5555;
+    --secondary-color: #f5c542;
 }
 
 * {
@@ -55,10 +63,9 @@ h1, h2, h3 {
 }
 
 .hero {
-    padding-top: 100px; /* zapobiega drżeniu od nav */
+    padding-top: 100px;
     height: 100vh;
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
-                url('../assets/images/hogwarts-bg.jpg') center/cover no-repeat;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../assets/images/hogwarts-bg.jpg') center/cover no-repeat;
     color: white;
     display: flex;
     flex-direction: column;
@@ -113,7 +120,8 @@ h1, h2, h3 {
 }
 
 .character-card {
-    background: white;
+    background: var(--light-gray);
+    color: var(--text-color);
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -138,14 +146,14 @@ h1, h2, h3 {
 .house-card {
     scroll-snap-align: start;
     min-width: 300px;
-    background: white;
+    background: var(--light-gray);
+    color: var(--text-color);
     border-radius: 8px;
     padding: 1.5rem;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Responsywność */
 @media (max-width: 768px) {
     .navbar {
         flex-direction: column;
@@ -161,12 +169,12 @@ h1, h2, h3 {
     }
 }
 
-/* Formularze */
 .contact-form {
     max-width: 600px;
     margin: 0 auto;
     padding: 2rem;
-    background: white;
+    background: var(--light-gray);
+    color: var(--text-color);
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
@@ -189,6 +197,9 @@ h1, h2, h3 {
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 1rem;
+    background-color: var(--light-gray);
+    color: var(--text-color);
+    border-color: #ccc;
 }
 
 .form-group textarea {
@@ -211,7 +222,6 @@ h1, h2, h3 {
     background-color: #5a0001;
 }
 
-/* Accordion */
 .accordion-btn {
     width: 100%;
     text-align: left;
@@ -219,6 +229,7 @@ h1, h2, h3 {
     font-size: 1rem;
     border: none;
     background-color: var(--light-gray);
+    color: var(--text-color);
     cursor: pointer;
     border-radius: 4px;
     margin-bottom: 0.5rem;
@@ -231,13 +242,15 @@ h1, h2, h3 {
 
 .accordion-content {
     padding: 1rem;
-    background-color: white;
+    background-color: var(--light-gray);
+    color: var(--text-color);
     border-radius: 4px;
     margin-bottom: 1rem;
 }
 
 .footer-content {
     background-color: var(--light-gray);
+    color: var(--text-color);
     padding: 2rem;
     display: flex;
     justify-content: space-between;
@@ -270,32 +283,37 @@ h1, h2, h3 {
     color: var(--primary-color);
 }
 
-/* --- DODANE: Quiz i Modal --- */
 .quiz-question {
     background: var(--light-gray);
+    color: var(--text-color);
     border-radius: 8px;
     padding: 1rem;
     margin-bottom: 1rem;
 }
+
 .quiz-question h3 {
     margin-bottom: 0.5rem;
 }
+
 .quiz-question label {
     display: block;
     margin-bottom: 0.5rem;
 }
+
 .result-item.correct {
     background-color: #d4edda;
     border-left: 4px solid #28a745;
     padding: 1rem;
     margin-bottom: 1rem;
 }
+
 .result-item.incorrect {
     background-color: #f8d7da;
     border-left: 4px solid #dc3545;
     padding: 1rem;
     margin-bottom: 1rem;
 }
+
 .modal {
     display: none;
     position: fixed;
@@ -307,8 +325,10 @@ h1, h2, h3 {
     overflow: auto;
     background-color: rgba(0,0,0,0.7);
 }
+
 .modal-content {
-    background-color: white;
+    background-color: var(--light-gray);
+    color: var(--text-color);
     margin: 10% auto;
     padding: 2rem;
     border-radius: 8px;
@@ -316,34 +336,48 @@ h1, h2, h3 {
     max-width: 600px;
     position: relative;
 }
+
 .close-modal {
     position: absolute;
     top: 1rem;
     right: 1rem;
     font-size: 1.5rem;
     cursor: pointer;
+    color: var(--text-color);
 }
+
 .modal-image {
     width: 150px;
     float: left;
     margin-right: 1rem;
 }
 
-/* Responsive menu */
+.nav-menu a {
+    color: var(--text-color);
+}
+
+.nav-menu a:hover {
+    color: var(--secondary-color);
+}
+
 .nav-menu.active {
     display: flex;
 }
+
 @media (max-width: 768px) {
     .nav-menu {
         display: none;
         flex-direction: column;
-        background: white;
+        background: var(--light-gray);
+        color: var(--text-color);
         width: 100%;
         padding: 1rem;
     }
+
     .nav-menu.active {
         display: flex;
     }
+
     .menu-toggle {
         display: block;
     }
@@ -355,68 +389,19 @@ h1, h2, h3 {
     margin-top: 0.25rem;
     display: block;
 }
-input.error, textarea.error {
+
+input.error,
+textarea.error {
     border-color: red;
 }
+
 .scroll-animation {
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.6s ease, transform 0.6s ease;
 }
+
 .scroll-animation.visible {
     opacity: 1;
     transform: translateY(0);
-}
-body.dark-mode {
-    background-color: #121212;
-    color: #f0f0f0;
-}
-
-body.dark-mode .character-card,
-body.dark-mode .house-card,
-body.dark-mode .contact-form,
-body.dark-mode .quiz-question,
-body.dark-mode .accordion-content,
-body.dark-mode .modal-content {
-    background-color: #1e1e1e;
-    color: #f0f0f0;
-}
-
-body.dark-mode .navbar {
-    background-color: rgba(30, 30, 30, 0.95);
-}
-body.dark-mode input,
-body.dark-mode textarea,
-body.dark-mode select {
-    background-color: #222;
-    color: #f0f0f0;
-    border-color: #444;
-}
-body.dark-mode .submit-btn {
-    background-color: #ff5555;
-    color: #fff;
-}
-body.dark-mode .submit-btn:hover {
-    background-color: #d04040;
-}
-body.dark-mode .cta-button {
-    background-color: #f5c542;
-    color: #000;
-}
-body.dark-mode .cta-button:hover {
-    background-color: #ddb636;
-}
-body.dark-mode .footer-content,
-body.dark-mode .footer-bottom {
-    background-color: #1a1a1a;
-    color: #f0f0f0;
-}
-body.dark-mode .nav-menu a {
-    color: #f0f0f0;
-}
-body.dark-mode .nav-menu a:hover {
-    color: #f5c542;
-}
-body.dark-mode .close-modal {
-    color: #f0f0f0;
 }
