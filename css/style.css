@@ -426,17 +426,34 @@ body {
 }
 
 .accordion-content {
-    padding: 0 1.25rem;
-    background-color: var(--light-gray);
-    border-radius: 0 0 4px 4px;
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.3s ease-out;
 }
 
 .accordion-content.active {
-    padding: 1.25rem;
-    max-height: 500px;
+    max-height: 1000px;
+}
+
+.spells-list {
+    list-style: none;
+    padding: 0;
+}
+
+.spell-item {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+.spell-name {
+    font-weight: bold;
+    display: block;
+    color: var(--primary-color);
+}
+
+.spell-description {
+    display: block;
+    margin-top: 0.25rem;
 }
 
 /* ================= QUIZ ================= */

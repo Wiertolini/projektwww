@@ -27,19 +27,37 @@ async function fetchCharacters() {
             'Arthur Weasley', 'Molly Weasley'
         ];
 
-        // Filtruj główne postacie ze zdjęciami
-        const mainCharactersWithImages = data.filter(character => {
-            const isMainCharacter = mainCharactersNames.includes(character.name);
-            const hasImage = character.image || character.picture;
-            return isMainCharacter && hasImage;
-        });
+        // Filtruj i mapuj główne postacie, poprawiając URL zdjęć
+        const mainCharacters = data
+            .filter(character => mainCharactersNames.includes(character.name))
+            .map(character => {
+                // Poprawiamy URL zdjęć
+                let imageUrl = character.image || character.picture;
+                
+                // Jeśli URL jest niepełny (bez domeny), dodajemy bazowy adres API
+                if (imageUrl && !imageUrl.startsWith('http') && !imageUrl.startsWith('data:')) {
+                    imageUrl = imageUrl.startsWith('/') 
+                        ? `https://hp-api.onrender.com${imageUrl}`
+                        : `https://hp-api.onrender.com/${imageUrl}`;
+                }
+                
+                // Domyślne zdjęcie jeśli brak lub URL jest nieprawidłowy
+                if (!imageUrl || imageUrl.includes('undefined')) {
+                    imageUrl = 'assets/images/default-character.jpg';
+                }
 
-        // Mapuj do formatu wyjściowego z polskimi opisami
-        return mainCharactersWithImages.map(character => ({
+                return {
+                    ...character,
+                    image: imageUrl
+                };
+            });
+
+        
+        return mainCharacters.map(character => ({
             id: character.id || Math.random().toString(36).substr(2, 9),
             name: character.name || 'Nieznana postać',
             house: character.house || 'Brak domu',
-            image: character.image || character.picture,
+            image: character.image,
             dateOfBirth: character.dateOfBirth || character.birthday || 'Nieznana',
             ancestry: character.ancestry || 'Nieznane',
             patronus: character.patronus || 'Brak',
@@ -56,6 +74,25 @@ async function fetchCharacters() {
     }
 }
 
+function filterAndSortCharacters(characters, searchTerm, houseFilter, sortOrder) {
+    if (!characters || !Array.isArray(characters)) return [];
+
+    return [...characters]
+        .filter(character => {
+            const matchesSearch = !searchTerm || 
+                character.name.toLowerCase().includes(searchTerm.toLowerCase());
+            const matchesHouse = !houseFilter || 
+                (character.house && character.house.toLowerCase() === houseFilter.toLowerCase());
+            return matchesSearch && matchesHouse;
+        })
+        .sort((a, b) => {
+            if (!sortOrder) return 0;
+            return sortOrder === 'asc' 
+                ? a.name.localeCompare(b.name) 
+                : b.name.localeCompare(a.name);
+        });
+}
+
 function displayCharacters(characters) {
     const container = document.getElementById('characters-container');
     container.innerHTML = '';
@@ -69,10 +106,13 @@ function displayCharacters(characters) {
         const card = document.createElement('div');
         card.className = 'character-card scroll-animation';
         card.innerHTML = `
-            <img src="${character.image}"
-                 alt="${character.name}" 
-                 class="character-image"
-                 onerror="this.parentNode.remove()">
+            <div class="character-image-container">
+                <img src="${character.image}"
+                     alt="${character.name}" 
+                     class="character-image"
+                     loading="lazy"
+                     onerror="this.onerror=null; this.src='assets/images/default-character.jpg'">
+            </div>
             <div class="character-info">
                 <h3>${character.name}</h3>
                 <p class="house ${character.house ? character.house.replace(/\s+/g, '-').toLowerCase() : 'no-house'}">
@@ -88,7 +128,16 @@ function displayCharacters(characters) {
         btn.addEventListener('click', () => showCharacterDetails(btn.dataset.id));
     });
 
-    initScrollAnimations();
+    // Ponowna obserwacja scroll-animation
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.scroll-animation').forEach(el => observer.observe(el));
 }
 
 async function showCharacterDetails(characterId) {
@@ -103,8 +152,12 @@ async function showCharacterDetails(characterId) {
 
         modalBody.innerHTML = `
             <div class="modal-character">
-                <img src="${character.image}" 
-                     alt="${character.name}" class="modal-image">
+                <div class="modal-image-container">
+                    <img src="${character.image}" 
+                         alt="${character.name}" 
+                         class="modal-image"
+                         onerror="this.onerror=null; this.src='assets/images/default-character.jpg'">
+                </div>
                 <div class="modal-details">
                     <h2>${character.name}</h2>
                     <p class="house ${character.house ? character.house.replace(/\s+/g, '-').toLowerCase() : 'no-house'}">
@@ -120,6 +173,15 @@ async function showCharacterDetails(characterId) {
 
         modal.style.display = 'block';
 
+        // Dodaj obsługę kliknięcia poza modalem
+        const closeModal = (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+                modal.removeEventListener('click', closeModal);
+            }
+        };
+        modal.addEventListener('click', closeModal);
+
     } catch (error) {
         console.error('Błąd:', error);
         showErrorModal('Nie udało się załadować szczegółów postaci.');
@@ -134,6 +196,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     allCharacters = await fetchCharacters();
     displayCharacters(allCharacters);
 
+    // Obsługa wyszukiwania
     document.getElementById('character-search').addEventListener('input', (e) => {
         const searchTerm = e.target.value;
         const filtered = filterAndSortCharacters(
@@ -145,6 +208,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         displayCharacters(filtered);
     });
 
+    // Filtrowanie po domu
     document.getElementById('house-filter').addEventListener('change', (e) => {
         const filtered = filterAndSortCharacters(
             allCharacters,
@@ -155,6 +219,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         displayCharacters(filtered);
     });
 
+    // Sortowanie
     document.getElementById('sort-characters').addEventListener('click', () => {
         currentSort = currentSort === 'asc' ? 'desc' : 'asc';
         const filtered = filterAndSortCharacters(
@@ -172,11 +237,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.querySelector('.close-modal').addEventListener('click', () => {
         document.getElementById('character-modal').style.display = 'none';
     });
-    window.addEventListener('click', (e) => {
-        if (e.target === document.getElementById('character-modal')) {
-            document.getElementById('character-modal').style.display = 'none';
-        }
-    });
 });
 
 function showErrorModal(message) {
@@ -193,4 +253,20 @@ function showErrorModal(message) {
     document.querySelector('.close-error').addEventListener('click', () => {
         errorModal.remove();
     });
+}
+
+// Funkcja pomocnicza do animacji
+function initScrollAnimations() {
+    const animatedElements = document.querySelectorAll('.scroll-animation');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+    
+    animatedElements.forEach(el => observer.observe(el));
 }
