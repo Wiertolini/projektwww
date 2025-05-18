@@ -1,11 +1,4 @@
-
-
-// W funkcji validateContactForm popraw część z localStorage:
-const submissions = JSON.parse(localStorage.getItem('contactSubmissions') || '[]');
-submissions.push(formData);
-localStorage.setItem('contactSubmissions', JSON.stringify(submissions));
-
-
+// forms.js
 // Funkcje pomocnicze
 function showError(input, message) {
     const errorElement = input.nextElementSibling;
@@ -80,7 +73,7 @@ function validateContactForm() {
                 form.reset();
                 
                 // Zapisz w localStorage
-                const submissions = JSON.parse(localStorage.getItem('contactSubmissions') || []);
+                const submissions = JSON.parse(localStorage.getItem('contactSubmissions') || '[]');
                 submissions.push(formData);
                 localStorage.setItem('contactSubmissions', JSON.stringify(submissions));
             } catch (error) {
@@ -99,16 +92,12 @@ function validateContactForm() {
 // Quiz
 async function initQuiz() {
     const quizForm = document.getElementById('quiz-form');
-    if (!quizForm) return;
+    const quizQuestionsContainer = document.getElementById('quiz-questions');
+    if (!quizForm || !quizQuestionsContainer) return;
 
     try {
-        // Pobranie pytań z API
-        const response = await fetch('https://hp-api.onrender.com/api/questions');
-        if (!response.ok) throw new Error('Failed to fetch questions');
-        const questions = await response.json();
-
-        // Jeśli API nie zwraca pytań, użyj domyślnych
-        const quizQuestions = questions.length > 0 ? questions.slice(0, 5) : [
+        // Domyślne pytania (na wypadek gdyby API nie działało)
+        const defaultQuestions = [
             {
                 question: "Kto jest dyrektorem Hogwartu na początku serii?",
                 options: ["Albus Dumbledore", "Minerva McGonagall", "Severus Snape", "Dolores Umbridge"],
@@ -123,14 +112,63 @@ async function initQuiz() {
                 question: "Który przedmiot nauczał Severus Snape?",
                 options: ["Obrona przed czarną magią", "Eliksiry", "Zaklęcia", "Opieka nad magicznymi stworzeniami"],
                 answer: "Eliksiry"
+            },
+            {
+                question: "Jak nazywa się różdżka Harry'ego Pottera?",
+                options: ["Blackthorn", "Holly", "Elder", "Vine"],
+                answer: "Holly"
+            },
+            {
+                question: "Kto jest opiekunem domu Gryffindor?",
+                options: ["Albus Dumbledore", "Minerva McGonagall", "Severus Snape", "Filius Flitwick"],
+                answer: "Minerva McGonagall"
             }
         ];
 
-        // Reszta funkcji pozostaje bez zmian...
+        let questions = defaultQuestions;
+
+        // Spróbuj pobrać pytania z API
+        try {
+            const response = await fetch('https://hp-api.onrender.com/api/questions');
+            if (response.ok) {
+                const apiQuestions = await response.json();
+                if (apiQuestions.length > 0) {
+                    questions = apiQuestions.slice(0, 5);
+                }
+            }
+        } catch (apiError) {
+            console.log('Używam domyślnych pytań quizu', apiError);
+        }
+
+        // Wygeneruj HTML dla pytań
+        quizQuestionsContainer.innerHTML = questions.map((question, index) => `
+            <div class="quiz-question">
+                <h3>${index + 1}. ${question.question}</h3>
+                <div class="options">
+                    ${question.options.map(option => `
+                        <label>
+                            <input type="radio" name="q${index}" value="${option}" required>
+                            ${option}
+                        </label>
+                    `).join('')}
+                </div>
+            </div>
+        `).join('');
+
+        // Obsługa wysłania quizu
+        quizForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const results = calculateResults(questions, quizForm);
+            displayResults(results);
+        });
+
     } catch (error) {
-        console.error('Błąd:', error);
-        document.getElementById('quiz-results').innerHTML = 
-            '<p class="error">Nie udało się załadować quizu. Spróbuj ponownie później.</p>';
+        console.error('Błąd inicjalizacji quizu:', error);
+        quizQuestionsContainer.innerHTML = `
+            <div class="quiz-error">
+                <p>Nie udało się załadować quizu. Spróbuj odświeżyć stronę.</p>
+            </div>
+        `;
     }
 }
 
@@ -173,6 +211,9 @@ function displayResults(results) {
             `).join('')}
         </div>
     `;
+    
+    // Przewiń do wyników
+    resultsContainer.scrollIntoView({ behavior: 'smooth' });
 }
 
 // Inicjalizacja formularzy
