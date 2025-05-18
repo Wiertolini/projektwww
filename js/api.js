@@ -1,7 +1,7 @@
 // api.js
 const API_BASE_URL = 'https://hp-api.onrender.com/api';
 
-let controller = new AbortController(); // do przerywania fetchów
+let controller = new AbortController(); // do przerywania zapytań
 
 async function fetchCharacters() {
     if (controller) controller.abort();
@@ -12,61 +12,58 @@ async function fetchCharacters() {
             signal: controller.signal
         });
         if (!response.ok) {
-            throw new Error('Failed to fetch characters');
+            throw new Error('Nie udało się pobrać postaci');
         }
         const data = await response.json();
 
-        // Ogranicz do głównych postaci
-        const mainCharacters = data.filter(character => 
-            ['Harry Potter', 'Ron Weasley', 'Hermione Granger', 'Draco Malfoy', 
-             'Albus Dumbledore', 'Severus Snape', 'Minerva McGonagall',
-             'Rubeus Hagrid', 'Sirius Black', 'Remus Lupin',
-             'Bellatrix Lestrange', 'Lord Voldemort'].includes(character.name)
-        );
+        // Lista głównych postaci
+        const mainCharactersNames = [
+            'Harry Potter', 'Ron Weasley', 'Hermione Granger',
+            'Draco Malfoy', 'Albus Dumbledore', 'Severus Snape',
+            'Minerva McGonagall', 'Rubeus Hagrid', 'Sirius Black',
+            'Remus Lupin', 'Bellatrix Lestrange', 'Lord Voldemort',
+            'Neville Longbottom', 'Luna Lovegood', 'Ginny Weasley',
+            'Dobby', 'Fred Weasley', 'George Weasley',
+            'Arthur Weasley', 'Molly Weasley'
+        ];
 
-        // Mapuj tylko przefiltrowane postaci (mainCharacters zamiast data)
-        return mainCharacters.map(character => ({
+        // Filtruj główne postacie ze zdjęciami
+        const mainCharactersWithImages = data.filter(character => {
+            const isMainCharacter = mainCharactersNames.includes(character.name);
+            const hasImage = character.image || character.picture;
+            return isMainCharacter && hasImage;
+        });
+
+        // Mapuj do formatu wyjściowego z polskimi opisami
+        return mainCharactersWithImages.map(character => ({
             id: character.id || Math.random().toString(36).substr(2, 9),
-            name: character.name || 'Unknown character',
-            house: character.house || 'No house',
-            image: character.image || character.picture || 'assets/images/default-character.jpg',
-            dateOfBirth: character.dateOfBirth || character.birthday || 'Unknown',
-            ancestry: character.ancestry || 'Unknown',
-            patronus: character.patronus || 'None',
-            description: `Wizard: ${character.wizard ? 'Yes' : 'No'}, 
-                         Gender: ${character.gender || 'Unknown'}, 
-                         Actor: ${character.actor || 'Unknown'}`
+            name: character.name || 'Nieznana postać',
+            house: character.house || 'Brak domu',
+            image: character.image || character.picture,
+            dateOfBirth: character.dateOfBirth || character.birthday || 'Nieznana',
+            ancestry: character.ancestry || 'Nieznane',
+            patronus: character.patronus || 'Brak',
+            description: `Czarodziej: ${character.wizard ? 'Tak' : 'Nie'}, 
+                         Płeć: ${character.gender || 'Nieznana'}, 
+                         Aktor: ${character.actor || 'Nieznany'}`
         }));
+
     } catch (error) {
         if (error.name === 'AbortError') return [];
-        console.error('Error fetching characters:', error);
-        showErrorModal('Failed to load characters. Please try again later.');
+        console.error('Błąd podczas pobierania postaci:', error);
+        showErrorModal('Nie udało się załadować postaci. Spróbuj ponownie później.');
         return [];
     }
-}
-
-function filterAndSortCharacters(characters, searchTerm, houseFilter, sortOrder) {
-    if (!characters || !Array.isArray(characters)) return [];
-
-    return [...characters]
-        .filter(character => {
-            const matchesSearch = !searchTerm || 
-                character.name.toLowerCase().includes(searchTerm.toLowerCase());
-            const matchesHouse = !houseFilter || 
-                (character.house && character.house.toLowerCase() === houseFilter.toLowerCase());
-            return matchesSearch && matchesHouse;
-        })
-        .sort((a, b) => {
-            if (!sortOrder) return 0;
-            return sortOrder === 'asc' 
-                ? a.name.localeCompare(b.name) 
-                : b.name.localeCompare(a.name);
-        });
 }
 
 function displayCharacters(characters) {
     const container = document.getElementById('characters-container');
     container.innerHTML = '';
+
+    if (characters.length === 0) {
+        container.innerHTML = '<p class="no-results">Nie znaleziono pasujących postaci</p>';
+        return;
+    }
 
     characters.forEach(character => {
         const card = document.createElement('div');
@@ -75,13 +72,13 @@ function displayCharacters(characters) {
             <img src="${character.image}"
                  alt="${character.name}" 
                  class="character-image"
-                 onerror="this.src='assets/images/default-character.jpg'">
+                 onerror="this.parentNode.remove()">
             <div class="character-info">
                 <h3>${character.name}</h3>
                 <p class="house ${character.house ? character.house.replace(/\s+/g, '-').toLowerCase() : 'no-house'}">
-                    ${character.house || 'No house'}
+                    ${character.house || 'Brak domu'}
                 </p>
-                <button class="details-btn" data-id="${character.id}">More details</button>
+                <button class="details-btn" data-id="${character.id}">Więcej szczegółów</button>
             </div>
         `;
         container.appendChild(card);
@@ -91,7 +88,6 @@ function displayCharacters(characters) {
         btn.addEventListener('click', () => showCharacterDetails(btn.dataset.id));
     });
 
-    // Ponowna obserwacja scroll-animation
     initScrollAnimations();
 }
 
@@ -100,7 +96,7 @@ async function showCharacterDetails(characterId) {
         const characters = await fetchCharacters();
         const character = characters.find(c => c.id === characterId);
 
-        if (!character) throw new Error('Character not found');
+        if (!character) throw new Error('Postać nie została znaleziona');
 
         const modal = document.getElementById('character-modal');
         const modalBody = document.getElementById('modal-body');
@@ -112,10 +108,10 @@ async function showCharacterDetails(characterId) {
                 <div class="modal-details">
                     <h2>${character.name}</h2>
                     <p class="house ${character.house ? character.house.replace(/\s+/g, '-').toLowerCase() : 'no-house'}">
-                        ${character.house || 'No house'}
+                        ${character.house || 'Brak domu'}
                     </p>
-                    <p><strong>Birth date:</strong> ${character.dateOfBirth}</p>
-                    <p><strong>Ancestry:</strong> ${character.ancestry}</p>
+                    <p><strong>Data urodzenia:</strong> ${character.dateOfBirth}</p>
+                    <p><strong>Pochodzenie:</strong> ${character.ancestry}</p>
                     <p><strong>Patronus:</strong> ${character.patronus}</p>
                     <p>${character.description}</p>
                 </div>
@@ -125,22 +121,14 @@ async function showCharacterDetails(characterId) {
         modal.style.display = 'block';
 
     } catch (error) {
-        console.error('Error:', error);
-        showErrorModal('Failed to load character details.');
+        console.error('Błąd:', error);
+        showErrorModal('Nie udało się załadować szczegółów postaci.');
     }
 }
 
 // Inicjalizacja po załadowaniu DOM
 let allCharacters = [];
 let currentSort = 'asc';
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-        }
-    });
-}, { threshold: 0.1 });
 
 document.addEventListener('DOMContentLoaded', async () => {
     allCharacters = await fetchCharacters();
@@ -177,10 +165,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         );
         displayCharacters(filtered);
         document.getElementById('sort-characters').textContent = 
-            currentSort === 'asc' ? 'Sort A-Z' : 'Sort Z-A';
+            currentSort === 'asc' ? 'Sortuj A-Z' : 'Sortuj Z-A';
     });
 
-    // Obsługa zamykania modala (dodana raz)
+    // Obsługa zamykania modala
     document.querySelector('.close-modal').addEventListener('click', () => {
         document.getElementById('character-modal').style.display = 'none';
     });
@@ -191,7 +179,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 });
 
-// Unified modal handler
 function showErrorModal(message) {
     const errorModal = document.createElement('div');
     errorModal.className = 'error-modal';
