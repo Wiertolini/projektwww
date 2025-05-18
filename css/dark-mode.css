@@ -1,4 +1,15 @@
-/* darkmode.css - Tryb ciemny z poprawioną estetyką */
+/* dark-mode.css */
+:root {
+    --text-color: #333;
+    --bg-color: #f8f8f8;
+    --light-gray: #f0f0f0;
+    --dark-gray: #666;
+    --primary-color: #e74c3c;
+    --secondary-color: #f5c542;
+    --border-color: #ddd;
+}
+
+/* Dark mode styles */
 @media (prefers-color-scheme: dark) {
     :root {
         --text-color: #f0f0f0;
@@ -7,92 +18,111 @@
         --dark-gray: #aaa;
         --primary-color: #ff5555;
         --secondary-color: #f5c542;
-    }
-
-    body.dark-mode {
-        background-color: var(--bg-color);
-        color: var(--text-color);
-    }
-
-    .character-card,
-    .house-card,
-    .contact-form,
-    .quiz-question,
-    .accordion-content {
-        background-color: var(--light-gray);
-        border: 1px solid #333;
-        color: var(--text-color);
-    }
-
-    .navbar {
-        background-color: rgba(30, 30, 30, 0.95);
-    }
-
-    input,
-    textarea,
-    select {
-        background-color: #222;
-        color: var(--text-color);
-        border-color: #444;
-    }
-
-    .submit-btn {
-        background-color: var(--primary-color);
-        color: #fff;
-    }
-
-    .submit-btn:hover {
-        background-color: #d04040;
-    }
-
-    .cta-button {
-        background-color: var(--secondary-color);
-        color: #000;
-    }
-
-    .cta-button:hover {
-        background-color: #ddb636;
-    }
-
-    .accordion-btn {
-        background-color: #1a1a1a;
-        color: var(--text-color);
-    }
-
-    .footer-content,
-    .footer-bottom {
-        background-color: #1a1a1a;
-        color: var(--text-color);
-    }
-
-    .nav-menu a {
-        color: var(--text-color);
-    }
-
-    .nav-menu a:hover {
-        color: var(--secondary-color);
-    }
-
-    .modal-content {
-        background-color: #1e1e1e;
-        color: var(--text-color);
-    }
-
-    .close-modal {
-        color: var(--text-color);
+        --border-color: #333;
     }
 }
 
-/* --- DODANE: Quiz i Error Modal --- */
+body.dark-mode {
+    --text-color: #f0f0f0;
+    --bg-color: #121212;
+    --light-gray: #1e1e1e;
+    --dark-gray: #aaa;
+    --primary-color: #ff5555;
+    --secondary-color: #f5c542;
+    --border-color: #333;
+}
+
+/* Stosowanie zmiennych */
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+.character-card,
+.house-card,
+.contact-form,
+.quiz-question,
+.accordion-content {
+    background-color: var(--light-gray);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+}
+
+.navbar {
+    background-color: rgba(30, 30, 30, 0.95);
+}
+
+input,
+textarea,
+select {
+    background-color: var(--light-gray);
+    color: var(--text-color);
+    border-color: var(--border-color);
+}
+
+.submit-btn {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+.submit-btn:hover {
+    background-color: color-mix(in srgb, var(--primary-color) 90%, black);
+}
+
+.cta-button {
+    background-color: var(--secondary-color);
+    color: #000;
+}
+
+.cta-button:hover {
+    background-color: color-mix(in srgb, var(--secondary-color) 90%, black);
+}
+
+.accordion-btn {
+    background-color: var(--light-gray);
+    color: var(--text-color);
+}
+
+.footer-content,
+.footer-bottom {
+    background-color: var(--light-gray);
+    color: var(--text-color);
+}
+
+.nav-menu a {
+    color: var(--text-color);
+}
+
+.nav-menu a:hover {
+    color: var(--secondary-color);
+}
+
+.modal-content {
+    background-color: var(--light-gray);
+    color: var(--text-color);
+}
+
+.close-modal {
+    color: var(--text-color);
+}
+
+/* Quiz styles */
 .result-item.correct {
-    background-color: #224422;
+    background-color: color-mix(in srgb, green 20%, transparent);
 }
 .result-item.incorrect {
-    background-color: #441111;
+    background-color: color-mix(in srgb, red 20%, transparent);
 }
+
 .error-modal {
-    background: #1e1e1e;
-    color: #fff;
-    padding: 2rem;
-    border-radius: 8px;
+    background: var(--light-gray);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
 }
+
+/* Ikony motywu */
+.theme-toggle .sun { display: block; }
+.theme-toggle .moon { display: none; }
+
+body.dark-mode .theme-toggle .sun { display: none; }
+body.dark-mode .theme-toggle .moon { display: block; }

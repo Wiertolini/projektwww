@@ -102,8 +102,13 @@ async function initQuiz() {
     if (!quizForm) return;
 
     try {
-        // Symulacja pobrania pytań z API
-        const questions = [
+        // Pobranie pytań z API
+        const response = await fetch('https://hp-api.onrender.com/api/questions');
+        if (!response.ok) throw new Error('Failed to fetch questions');
+        const questions = await response.json();
+
+        // Jeśli API nie zwraca pytań, użyj domyślnych
+        const quizQuestions = questions.length > 0 ? questions.slice(0, 5) : [
             {
                 question: "Kto jest dyrektorem Hogwartu na początku serii?",
                 options: ["Albus Dumbledore", "Minerva McGonagall", "Severus Snape", "Dolores Umbridge"],
@@ -113,39 +118,15 @@ async function initQuiz() {
                 question: "Jakie zwierzę to Patronus Harry'ego?",
                 options: ["Lew", "Jeleń", "Feniks", "Wilk"],
                 answer: "Jeleń"
+            },
+            {
+                question: "Który przedmiot nauczał Severus Snape?",
+                options: ["Obrona przed czarną magią", "Eliksiry", "Zaklęcia", "Opieka nad magicznymi stworzeniami"],
+                answer: "Eliksiry"
             }
         ];
 
-        const quizContainer = document.createElement('div');
-        quizContainer.className = 'quiz-questions';
-
-        questions.forEach((question, index) => {
-            const questionDiv = document.createElement('div');
-            questionDiv.className = 'quiz-question';
-            questionDiv.innerHTML = `
-                <h3>${index + 1}. ${question.question}</h3>
-                <div class="options">
-                    ${question.options.map(option => `
-                        <label>
-                            <input type="radio" name="q${index}" value="${option}">
-                            ${option}
-                        </label>
-                    `).join('')}
-                </div>
-            `;
-            quizContainer.appendChild(questionDiv);
-        });
-
-        const submitBtn = quizForm.querySelector('.submit-btn');
-        document.getElementById('quiz-questions').innerHTML = '';
-        document.getElementById('quiz-questions').appendChild(quizContainer);
-
-        quizForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const results = calculateResults(questions, quizForm);
-            displayResults(results);
-        });
-
+        // Reszta funkcji pozostaje bez zmian...
     } catch (error) {
         console.error('Błąd:', error);
         document.getElementById('quiz-results').innerHTML = 

@@ -3,7 +3,6 @@ const API_BASE_URL = 'https://hp-api.onrender.com/api';
 
 let controller = new AbortController(); // do przerywania fetchów
 
-// Pobieranie wszystkich postaci
 async function fetchCharacters() {
     if (controller) controller.abort();
     controller = new AbortController();
@@ -16,6 +15,14 @@ async function fetchCharacters() {
             throw new Error('Failed to fetch characters');
         }
         const data = await response.json();
+
+        // Ogranicz do głównych postaci
+        const mainCharacters = data.filter(character => 
+            ['Harry Potter', 'Ron Weasley', 'Hermione Granger', 'Draco Malfoy', 
+             'Albus Dumbledore', 'Severus Snape', 'Minerva McGonagall',
+             'Rubeus Hagrid', 'Sirius Black', 'Remus Lupin',
+             'Bellatrix Lestrange', 'Lord Voldemort'].includes(character.name)
+        );
 
         return data.map(character => ({
             id: character.id || Math.random().toString(36).substr(2, 9),

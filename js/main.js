@@ -4,20 +4,28 @@ document.addEventListener('DOMContentLoaded', () => {
     const navMenu = document.querySelector('.nav-menu');
     const themeToggle = document.querySelector('.theme-toggle');
     const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-    const savedTheme = localStorage.getItem('theme');
 
     // Ustawienie motywu przy ładowaniu strony
-    if (savedTheme === 'dark') { document.body.classList.add('dark-mode'); }
-    else if (savedTheme === 'light') { document.body.classList.remove('dark-mode'); }
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark' || (savedTheme === null && prefersDarkScheme.matches)) {
         document.body.classList.add('dark-mode');
     }
 
+    // Obsługa przycisku zmiany motywu
     if (themeToggle) {
         themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-            const isDark = document.body.classList.contains('dark-mode');
+            const isDark = document.body.classList.toggle('dark-mode');
             localStorage.setItem('theme', isDark ? 'dark' : 'light');
         });
+    }
+
+    // Ustawienie motywu przy ładowaniu strony
+    if (savedTheme === 'dark') { 
+        document.body.classList.add('dark-mode'); 
+    } else if (savedTheme === 'light') { 
+        document.body.classList.remove('dark-mode'); 
+    } else if (prefersDarkScheme.matches) {
+        document.body.classList.add('dark-mode');
     }
 
     // Obsługa menu mobilnego
