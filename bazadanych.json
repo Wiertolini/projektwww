@@ -303,18 +303,6 @@
     "obraz": ""
   },
   {
-    "imię": "Dobby",
-    "płeć": "mężczyzna",
-    "gatunek": "skrzat domowy",
-    "czarodziej": false,
-    "oczy": "zielone",
-    "uczeń_hogwartu": false,
-    "pracownik_hogwartu": false,
-    "aktor": null,
-    "żyje": false,
-    "obraz": ""
-  },
-  {
     "imię": "Dolores Umbridge",
     "płeć": "kobieta",
     "gatunek": "człowiek",
@@ -386,24 +374,5 @@
     "aktor": "Jamie Waylett",
     "żyje": false,
     "obraz": "https://ik.imagekit.io/hpapi/crabbe.jpg"
-  },
-  {
-    "imię": "Pan Crabbe",
-    "pseudonimy": [],
-    "płeć": "mężczyzna",
-    "gatunek": "człowiek",
-    "dom": "",
-    "data_urodzenia": null,
-    "czarodziej": true,
-    "pochodzenie": "czysta krew",
-    "oczy": "",
-    "włosy": "",
-    "różdżka": ", , brak danych",
-    "patronus": "",
-    "uczeń_hogwartu": false,
-    "pracownik_hogwartu": false,
-    "aktor": "Paschal Friel",
-    "żyje": false,
-    "obraz": ""
   }
 ]

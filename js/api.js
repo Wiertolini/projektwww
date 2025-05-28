@@ -1,73 +1,41 @@
-// api.js
-const API_BASE_URL = 'https://hp-api.onrender.com/api';
-
-let controller = new AbortController(); // do przerywania zapytań
+let controller = new AbortController();
+let allCharacters = []; // Przeniosłem tutaj, aby mieć globalny dostęp
+let currentSort = 'asc';
 
 async function fetchCharacters() {
-    if (controller) controller.abort();
-    controller = new AbortController();
-
     try {
-        const response = await fetch(`${API_BASE_URL}/characters`, {
-            signal: controller.signal
-        });
+        const response = await fetch('bazadanych.json');
         if (!response.ok) {
-            throw new Error('Nie udało się pobrać postaci');
+            throw new Error('Nie udało się pobrać danych postaci');
         }
         const data = await response.json();
 
-        // Lista głównych postaci
-        const mainCharactersNames = [
-            'Harry Potter', 'Ron Weasley', 'Hermione Granger',
-            'Draco Malfoy', 'Albus Dumbledore', 'Severus Snape',
-            'Minerva McGonagall', 'Rubeus Hagrid', 'Sirius Black',
-            'Remus Lupin', 'Bellatrix Lestrange', 'Lord Voldemort',
-            'Neville Longbottom', 'Luna Lovegood', 'Ginny Weasley',
-            'Dobby', 'Fred Weasley', 'George Weasley',
-            'Arthur Weasley', 'Molly Weasley'
-        ];
+        // Mapowanie wszystkich postaci z pliku JSON
+        const characters = data.map((character, index) => {
+            let imageUrl = character.obraz || '';
+            
+            if (!imageUrl || imageUrl.includes('undefined')) {
+                imageUrl = 'assets/images/default-character.jpg';
+            }
 
-        // Filtruj i mapuj główne postacie, poprawiając URL zdjęć
-        const mainCharacters = data
-            .filter(character => mainCharactersNames.includes(character.name))
-            .map(character => {
-                // Poprawiamy URL zdjęć
-                let imageUrl = character.image || character.picture;
-                
-                // Jeśli URL jest niepełny (bez domeny), dodajemy bazowy adres API
-                if (imageUrl && !imageUrl.startsWith('http') && !imageUrl.startsWith('data:')) {
-                    imageUrl = imageUrl.startsWith('/') 
-                        ? `https://hp-api.onrender.com${imageUrl}`
-                        : `https://hp-api.onrender.com/${imageUrl}`;
-                }
-                
-                // Domyślne zdjęcie jeśli brak lub URL jest nieprawidłowy
-                if (!imageUrl || imageUrl.includes('undefined')) {
-                    imageUrl = 'assets/images/default-character.jpg';
-                }
+            return {
+                id: `char-${index}`, // Używam indeksu jako części ID dla spójności
+                name: character.imię || 'Nieznana postać',
+                house: character.dom || 'Brak domu',
+                image: imageUrl,
+                dateOfBirth: character.data_urodzenia || character.rok_urodzenia || 'Nieznana',
+                ancestry: character.pochodzenie || 'Nieznane',
+                patronus: character.patronus || 'Brak',
+                description: `Czarodziej: ${character.czarodziej ? 'Tak' : 'Nie'}, 
+                             Płeć: ${character.płeć || 'Nieznana'}, 
+                             Gatunek: ${character.gatunek || 'Nieznany'},
+                             Aktor: ${character.aktor || 'Nieznany'}`
+            };
+        });
 
-                return {
-                    ...character,
-                    image: imageUrl
-                };
-            });
-
-        
-        return mainCharacters.map(character => ({
-            id: character.id || Math.random().toString(36).substr(2, 9),
-            name: character.name || 'Nieznana postać',
-            house: character.house || 'Brak domu',
-            image: character.image,
-            dateOfBirth: character.dateOfBirth || character.birthday || 'Nieznana',
-            ancestry: character.ancestry || 'Nieznane',
-            patronus: character.patronus || 'Brak',
-            description: `Czarodziej: ${character.wizard ? 'Tak' : 'Nie'}, 
-                         Płeć: ${character.gender || 'Nieznana'}, 
-                         Aktor: ${character.actor || 'Nieznany'}`
-        }));
+        return characters;
 
     } catch (error) {
-        if (error.name === 'AbortError') return [];
         console.error('Błąd podczas pobierania postaci:', error);
         showErrorModal('Nie udało się załadować postaci. Spróbuj ponownie później.');
         return [];
@@ -124,11 +92,15 @@ function displayCharacters(characters) {
         container.appendChild(card);
     });
 
+    // Dodajemy event listenery do przycisków
     document.querySelectorAll('.details-btn').forEach(btn => {
-        btn.addEventListener('click', () => showCharacterDetails(btn.dataset.id));
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const characterId = btn.dataset.id;
+            showCharacterDetails(characterId);
+        });
     });
 
-    // Ponowna obserwacja scroll-animation
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -140,10 +112,9 @@ function displayCharacters(characters) {
     document.querySelectorAll('.scroll-animation').forEach(el => observer.observe(el));
 }
 
-async function showCharacterDetails(characterId) {
+function showCharacterDetails(characterId) {
     try {
-        const characters = await fetchCharacters();
-        const character = characters.find(c => c.id === characterId);
+        const character = allCharacters.find(c => c.id === characterId);
 
         if (!character) throw new Error('Postać nie została znaleziona');
 
@@ -173,14 +144,21 @@ async function showCharacterDetails(characterId) {
 
         modal.style.display = 'block';
 
-        // Dodaj obsługę kliknięcia poza modalem
-        const closeModal = (e) => {
+        // Zamknięcie modala po kliknięciu na tło
+        modal.addEventListener('click', (e) => {
             if (e.target === modal) {
                 modal.style.display = 'none';
-                modal.removeEventListener('click', closeModal);
             }
-        };
-        modal.addEventListener('click', closeModal);
+        });
+
+        // Zamknięcie modala przyciskiem
+        const closeBtn = document.createElement('button');
+        closeBtn.textContent = 'Zamknij';
+        closeBtn.className = 'close-modal-btn';
+        closeBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+        modalBody.appendChild(closeBtn);
 
     } catch (error) {
         console.error('Błąd:', error);
@@ -188,15 +166,10 @@ async function showCharacterDetails(characterId) {
     }
 }
 
-// Inicjalizacja po załadowaniu DOM
-let allCharacters = [];
-let currentSort = 'asc';
-
 document.addEventListener('DOMContentLoaded', async () => {
     allCharacters = await fetchCharacters();
     displayCharacters(allCharacters);
 
-    // Obsługa wyszukiwania
     document.getElementById('character-search').addEventListener('input', (e) => {
         const searchTerm = e.target.value;
         const filtered = filterAndSortCharacters(
@@ -208,7 +181,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         displayCharacters(filtered);
     });
 
-    // Filtrowanie po domu
     document.getElementById('house-filter').addEventListener('change', (e) => {
         const filtered = filterAndSortCharacters(
             allCharacters,
@@ -219,7 +191,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         displayCharacters(filtered);
     });
 
-    // Sortowanie
     document.getElementById('sort-characters').addEventListener('click', () => {
         currentSort = currentSort === 'asc' ? 'desc' : 'asc';
         const filtered = filterAndSortCharacters(
@@ -231,11 +202,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         displayCharacters(filtered);
         document.getElementById('sort-characters').textContent = 
             currentSort === 'asc' ? 'Sortuj A-Z' : 'Sortuj Z-A';
-    });
-
-    // Obsługa zamykania modala
-    document.querySelector('.close-modal').addEventListener('click', () => {
-        document.getElementById('character-modal').style.display = 'none';
     });
 });
 
@@ -255,7 +221,6 @@ function showErrorModal(message) {
     });
 }
 
-// Funkcja pomocnicza do animacji
 function initScrollAnimations() {
     const animatedElements = document.querySelectorAll('.scroll-animation');
     
@@ -270,3 +235,6 @@ function initScrollAnimations() {
     
     animatedElements.forEach(el => observer.observe(el));
 }
+
+// Inicjalizacja animacji
+initScrollAnimations();

@@ -68,6 +68,7 @@ body {
 }
 
 .logo img {
+    
     height: 50px;
     width: auto;
     transition: all 0.3s ease;
@@ -317,11 +318,11 @@ body {
 }
 
 .house.Gryffindor {
-    color: #740001;
+    color: #ad0c0f;
 }
 
 .house.Slytherin {
-    color: #1a472a;
+    color: #087b30;
 }
 
 .house.Hufflepuff {
@@ -329,7 +330,7 @@ body {
 }
 
 .house.Ravenclaw {
-    color: #0e1a40;
+    color: #193ba9;
 }
 
 .details-btn {
@@ -648,6 +649,8 @@ textarea.error {
     text-decoration: none;
     transition: var(--transition);
     font-family: var(--font-main);
+    display: inline-block;
+    padding: 0.25rem 0;
 }
 
 .footer-section ul li a:hover {
@@ -655,28 +658,104 @@ textarea.error {
     padding-left: 5px;
 }
 
+/* Nowe style dla przycisków w stopce */
+.footer-btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    font-family: var(--font-main);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: var(--transition);
+    margin: 0.25rem 0;
+    text-align: center;
+}
+
+.footer-btn:hover {
+    background-color: #5a0001;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Style dla ikon mediów społecznościowych */
 .social-icons {
     display: flex;
     gap: 1rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
 }
 
 .social-icons a {
-    color: var(--text-color);
+    color: white;
     font-size: 1.25rem;
     transition: var(--transition);
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     width: 40px;
     height: 40px;
-    line-height: 40px;
-    text-align: center;
     border-radius: 50%;
-    background-color: rgba(0, 0, 0, 0.05);
+    text-decoration: none;
+}
+
+.social-icons a.facebook {
+    background-color: #3b5998;
+}
+
+.social-icons a.twitter {
+    background-color: #1da1f2;
+}
+
+.social-icons a.instagram {
+    background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+}
+
+.social-icons a.youtube {
+    background-color: #ff0000;
+}
+
+.social-icons a.tiktok {
+    background-color: #000000;
 }
 
 .social-icons a:hover {
-    color: var(--primary-color);
-    transform: translateY(-3px);
-    background-color: rgba(0, 0, 0, 0.1);
+    transform: translateY(-3px) scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Style dla newslettera w stopce */
+.newsletter-form {
+    margin-top: 1rem;
+}
+
+.newsletter-form input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+    font-family: var(--font-main);
+}
+
+.newsletter-form button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: var(--secondary-color);
+    color: #000;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: var(--transition);
+    font-family: var(--font-heading);
+}
+
+.newsletter-form button:hover {
+    background-color: #b08e1d;
 }
 
 .footer-bottom {
@@ -685,6 +764,49 @@ textarea.error {
     background-color: var(--dark-gray);
     color: white;
     font-size: 0.875rem;
+}
+
+/* Poprawki dla spójności przycisków w całej aplikacji */
+button, .btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    border: none;
+    font-family: var(--font-main);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+button.primary, .btn.primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+button.primary:hover, .btn.primary:hover {
+    background-color: #5a0001;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+button.secondary, .btn.secondary {
+    background-color: var(--secondary-color);
+    color: #000;
+}
+
+button.secondary:hover, .btn.secondary:hover {
+    background-color: #b08e1d;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+button:disabled, .btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none !important;
 }
 
 /* ================= MODAL ================= */
