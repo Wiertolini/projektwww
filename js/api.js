@@ -32,7 +32,7 @@ async function fetchCharacters() {
                         Płeć: ${character.płeć || 'Nieznana'},
                         Gatunek: ${character.gatunek || 'Nieznany'},
                         Dom: ${character.dom || 'Brak domu'},
-                        Data urodzenia: ${character.data_urodzenia || character.rok_urodzenia || 'Nieznana'},
+                        Data urodzenia: ${character.data_urodzenia || 'Nieznana'},
                         Czarodziej: ${character.czarodziej ? 'Tak' : 'Nie'},
                         Pochodzenie: ${character.pochodzenie || 'Nieznane'},
                         Kolor oczu: ${character.oczy || 'Nieznany'},

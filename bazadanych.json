@@ -1,378 +1,619 @@
-[
-  {
-    "imię": "Harry Potter",
-    "pseudonimy": ["Chłopiec, Który Przeżył", "Wybraniec"],
-    "płeć": "mężczyzna",
-    "gatunek": "człowiek",
-    "dom": "Gryffindor",
-    "data_urodzenia": "31-07-1980",
-    "czarodziej": true,
-    "pochodzenie": "półkrwi",
-    "oczy": "zielone",
-    "włosy": "czarne",
-    "różdżka": "ostrokrzew, pióro feniksa, 11 cali",
-    "patronus": "jeleń",
-    "uczeń_hogwartu": true,
-    "pracownik_hogwartu": false,
-    "aktor": "Daniel Radcliffe",
-    "żyje": true,
-    "obraz": "https://ik.imagekit.io/hpapi/harry.jpg"
-  },
-  {
-    "imię": "Hermiona Granger",
-    "pseudonimy": ["Hermy", "Panna Wszystkowiedząca"],
-    "płeć": "kobieta",
-    "gatunek": "człowiek",
-    "dom": "Gryffindor",
-    "data_urodzenia": "19-09-1979",
-    "czarodziej": true,
-    "pochodzenie": "mugolak",
-    "oczy": "brązowe",
-    "włosy": "brązowe",
-    "różdżka": "winorośl, smocze serce, 10.75 cala",
-    "patronus": "wydra",
-    "uczeń_hogwartu": true,
-    "pracownik_hogwartu": false,
-    "aktor": "Emma Watson",
-    "żyje": true,
-    "obraz": "https://ik.imagekit.io/hpapi/hermione.jpeg"
-  },
-  {
-    "imię": "Ron Weasley",
-    "pseudonimy": ["Ronnie", "Wheezy"],
-    "płeć": "mężczyzna",
-    "gatunek": "człowiek",
-    "dom": "Gryffindor",
-    "data_urodzenia": "01-03-1980",
-    "czarodziej": true,
-    "pochodzenie": "czysta krew",
-    "oczy": "niebieskie",
-    "włosy": "rude",
-    "różdżka": "wierzba, włos z ogona jednorożca, 14 cali",
-    "patronus": "terier Jack Russell",
-    "uczeń_hogwartu": true,
-    "pracownik_hogwartu": false,
-    "aktor": "Rupert Grint",
-    "żyje": true,
-    "obraz": "https://ik.imagekit.io/hpapi/ron.jpg"
-  },
-  {
-    "imię": "Albus Dumbledore",
-    "pseudonimy": ["Profesor Dumbledore"],
-    "płeć": "mężczyzna",
-    "gatunek": "człowiek",
-    "dom": "Gryffindor",
-    "rok_urodzenia": 1881,
-    "czarodziej": true,
-    "pochodzenie": "półkrwi",
-    "oczy": "niebieskie",
-    "włosy": "srebrne",
-    "różdżka": "czarna różdżka (starsza)",
-    "patronus": "feniks",
-    "uczeń_hogwartu": false,
-    "pracownik_hogwartu": true,
-    "aktor": "Richard Harris, Michael Gambon",
-    "żyje": false,
-    "obraz": ""
-  },
-  {
-    "imię": "Severus Snape",
-    "pseudonimy": ["Książę Półkrwi"],
-    "płeć": "mężczyzna",
-    "gatunek": "człowiek",
-    "dom": "Slytherin",
-    "data_urodzenia": "09-01-1960",
-    "czarodziej": true,
-    "pochodzenie": "półkrwi",
-    "oczy": "czarne",
-    "włosy": "czarne",
-    "patronus": "łania",
-    "uczeń_hogwartu": false,
-    "pracownik_hogwartu": true,
-    "aktor": "Alan Rickman",
-    "żyje": false,
-    "obraz": "https://ik.imagekit.io/hpapi/snape.jpg"
-  },
-  {
-    "imię": "Lord Voldemort",
-    "pseudonimy": ["Tom Riddle", "Ten-Którego-Imienia-Nie-Wolno-Wymawiać"],
-    "płeć": "mężczyzna",
-    "gatunek": "człowiek",
-    "dom": "Slytherin",
-    "data_urodzenia": "31-12-1926",
-    "czarodziej": true,
-    "pochodzenie": "półkrwi",
-    "oczy": "szkarłatne",
-    "włosy": "łysy",
-    "różdżka": "cis, pióro feniksa, 13.5 cala",
-    "patronus": null,
-    "uczeń_hogwartu": false,
-    "pracownik_hogwartu": false,
-    "aktor": "Ralph Fiennes",
-    "żyje": false,
-    "obraz": "https://ik.imagekit.io/hpapi/voldemort.jpg"
-  },
-  {
-    "imię": "Draco Malfoy",
-    "płeć": "mężczyzna",
-    "gatunek": "człowiek",
-    "dom": "Slytherin",
-    "data_urodzenia": "05-06-1980",
-    "czarodziej": true,
-    "pochodzenie": "czysta krew",
-    "oczy": "szare",
-    "włosy": "blond",
-    "różdżka": "głóg, włos z ogona jednorożca, 10 cali",
-    "patronus": null,
-    "uczeń_hogwartu": true,
-    "pracownik_hogwartu": false,
-    "aktor": "Tom Felton",
-    "żyje": true,
-    "obraz": "https://ik.imagekit.io/hpapi/draco.jpg"
-  },
-  {
-    "imię": "Sirius Black",
-    "pseudonimy": ["Łapa", "Snuffles"],
-    "płeć": "mężczyzna",
-    "gatunek": "człowiek",
-    "dom": "Gryffindor",
-    "data_urodzenia": "03-11-1959",
-    "czarodziej": true,
-    "pochodzenie": "czysta krew",
-    "oczy": "szare",
-    "włosy": "czarne",
-    "patronus": "zając",
-    "uczeń_hogwartu": false,
-    "pracownik_hogwartu": false,
-    "aktor": "Gary Oldman",
-    "żyje": false,
-    "obraz": "https://ik.imagekit.io/hpapi/sirius.JPG"
-  },
-  {
-    "imię": "Rubeus Hagrid",
-    "pseudonimy": ["Profesor Hagrid"],
-    "płeć": "mężczyzna",
-    "gatunek": "pół-olbrzym",
-    "dom": "Gryffindor",
-    "data_urodzenia": "06-12-1928",
-    "czarodziej": true,
-    "pochodzenie": "półkrwi",
-    "oczy": "czarne",
-    "włosy": "czarne",
-    "różdżka": "dąb, długość 16 cali",
-    "patronus": null,
-    "uczeń_hogwartu": false,
-    "pracownik_hogwartu": true,
-    "aktor": "Robbie Coltrane",
-    "żyje": true,
-    "obraz": "https://ik.imagekit.io/hpapi/hagrid.png"
-  },
-  {
-    "imię": "Luna Lovegood",
-    "pseudonimy": ["Pomyluna Lovegood"],
-    "płeć": "kobieta",
-    "gatunek": "człowiek",
-    "dom": "Ravenclaw",
-    "data_urodzenia": "13-02-1981",
-    "czarodziej": true,
-    "oczy": "srebrne",
-    "włosy": "blond",
-    "patronus": "zając",
-    "uczeń_hogwartu": true,
-    "pracownik_hogwartu": false,
-    "aktor": "Evanna Lynch",
-    "żyje": true,
-    "obraz": "https://ik.imagekit.io/hpapi/luna.jpg"
-  },
-
-  {
-    "imię": "Neville Longbottom",
-    "płeć": "mężczyzna",
-    "gatunek": "człowiek",
-    "dom": "Gryffindor",
-    "data_urodzenia": "30-07-1980",
-    "czarodziej": true,
-    "pochodzenie": "czysta krew",
-    "włosy": "blond",
-    "różdżka": "wiśnia, włos z ogona jednorożca, 13 cali",
-    "patronus": "niematerialny",
-    "uczeń_hogwartu": true,
-    "pracownik_hogwartu": false,
-    "aktor": "Matthew Lewis",
-    "żyje": true,
-    "obraz": "https://ik.imagekit.io/hpapi/neville.jpg"
-  },
-  {
-    "imię": "Ginny Weasley",
-    "płeć": "kobieta",
-    "gatunek": "człowiek",
-    "dom": "Gryffindor",
-    "data_urodzenia": "11-08-1981",
-    "czarodziej": true,
-    "pochodzenie": "czysta krew",
-    "oczy": "brązowe",
-    "włosy": "rude",
-    "różdżka": "cis",
-    "patronus": "koń",
-    "uczeń_hogwartu": true,
-    "pracownik_hogwartu": false,
-    "aktor": "Bonnie Wright",
-    "żyje": true,
-    "obraz": "https://ik.imagekit.io/hpapi/ginny.jpg"
-  },
-  {
-    "imię": "Remus Lupin",
-    "pseudonimy": ["Moony"],
-    "płeć": "mężczyzna",
-    "gatunek": "wilkołak",
-    "dom": "Gryffindor",
-    "data_urodzenia": "10-03-1960",
-    "czarodziej": true,
-    "pochodzenie": "półkrwi",
-    "oczy": "zielone",
-    "włosy": "brązowe",
-    "różdżka": "cyprys, włos z ogona jednorożca, 10.25 cala",
-    "patronus": "wilk",
-    "uczeń_hogwartu": false,
-    "pracownik_hogwartu": true,
-    "aktor": "David Thewlis",
-    "żyje": false,
-    "obraz": "https://ik.imagekit.io/hpapi/lupin.jpg"
-  },
-  {
-    "imię": "Bellatrix Lestrange",
-    "pseudonimy": ["Bella"],
-    "płeć": "kobieta",
-    "gatunek": "człowiek",
-    "dom": "Slytherin",
-    "rok_urodzenia": 1951,
-    "czarodziej": true,
-    "pochodzenie": "czysta krew",
-    "oczy": "brązowe",
-    "włosy": "czarne",
-    "różdżka": "orzech, smocze serce, 12.75 cala",
-    "patronus": null,
-    "uczeń_hogwartu": false,
-    "pracownik_hogwartu": false,
-    "aktor": "Helena Bonham Carter",
-    "żyje": false,
-    "obraz": "https://ik.imagekit.io/hpapi/bellatrix.jpg"
-  },
-  {
-    "imię": "Cho Chang",
-    "płeć": "kobieta",
-    "gatunek": "człowiek",
-    "dom": "Ravenclaw",
-    "data_urodzenia": "07-04-1979",
-    "czarodziej": true,
-    "oczy": "brązowe",
-    "włosy": "czarne",
-    "patronus": "łabędź",
-    "uczeń_hogwartu": true,
-    "pracownik_hogwartu": false,
-    "aktor": "Katie Leung",
-    "żyje": true,
-    "obraz": "https://ik.imagekit.io/hpapi/cho.jpg"
-  },
-  {
-    "imię": "Fred Weasley",
-    "płeć": "mężczyzna",
-    "gatunek": "człowiek",
-    "dom": "Gryffindor",
-    "czarodziej": true,
-    "pochodzenie": "czysta krew",
-    "włosy": "rude",
-    "uczeń_hogwartu": true,
-    "pracownik_hogwartu": false,
-    "aktor": "James Phelps",
-    "żyje": false,
-    "obraz": ""
-  },
-  {
-    "imię": "George Weasley",
-    "płeć": "mężczyzna",
-    "gatunek": "człowiek",
-    "dom": "Gryffindor",
-    "czarodziej": true,
-    "pochodzenie": "czysta krew",
-    "włosy": "rude",
-    "uczeń_hogwartu": true,
-    "pracownik_hogwartu": false,
-    "aktor": "Oliver Phelps",
-    "żyje": true,
-    "obraz": ""
-  },
-  {
-    "imię": "Dolores Umbridge",
-    "płeć": "kobieta",
-    "gatunek": "człowiek",
-    "dom": "Slytherin",
-    "czarodziej": true,
-    "pochodzenie": "półkrwi",
-    "oczy": "brązowe",
-    "włosy": "siwe",
-    "różdżka": "brzoza, smocze serce, 8 cali",
-    "patronus": "kot perski",
-    "uczeń_hogwartu": false,
-    "pracownik_hogwartu": true,
-    "aktor": "Imelda Staunton",
-    "żyje": true,
-    "obraz": "https://ik.imagekit.io/hpapi/umbridge.jpg"
-  },
-  {
-    "imię": "Minerva McGonagall",
-    "płeć": "kobieta",
-    "gatunek": "człowiek",
-    "dom": "Gryffindor",
-    "data_urodzenia": "04-10-1925",
-    "czarodziej": true,
-    "pochodzenie": "półkrwi",
-    "włosy": "czarne",
-    "różdżka": "jodła, smocze serce, 9.5 cala",
-    "patronus": "kot pręgowany",
-    "uczeń_hogwartu": false,
-    "pracownik_hogwartu": true,
-    "aktor": "Maggie Smith",
-    "żyje": true,
-    "obraz": "https://ik.imagekit.io/hpapi/mcgonagall.jpg"
-  },
-
-  {
-    "imię": "Lucjusz Malfoy",
-    "pseudonimy": [],
-    "płeć": "mężczyzna",
-    "gatunek": "człowiek",
-    "dom": "Slytherin",
-    "data_urodzenia": null,
-    "czarodziej": true,
-    "pochodzenie": "czysta krew",
-    "oczy": "szare",
-    "włosy": "blond",
-    "różdżka": "wiąz, struna serca smoka, 18 cali",
-    "patronus": "",
-    "uczeń_hogwartu": false,
-    "pracownik_hogwartu": false,
-    "aktor": "Jason Isaacs",
-    "żyje": true,
-    "obraz": "https://ik.imagekit.io/hpapi/lucius.jpg"
-  },
-  {
-    "imię": "Vincent Crabbe",
-    "pseudonimy": [],
-    "płeć": "mężczyzna",
-    "gatunek": "człowiek",
-    "dom": "Slytherin",
-    "data_urodzenia": null,
-    "czarodziej": true,
-    "pochodzenie": "czysta krew",
-    "oczy": "czarne",
-    "włosy": "czarne",
-    "różdżka": ", , brak danych",
-    "patronus": "",
-    "uczeń_hogwartu": true,
-    "pracownik_hogwartu": false,
-    "aktor": "Jamie Waylett",
-    "żyje": false,
-    "obraz": "https://ik.imagekit.io/hpapi/crabbe.jpg"
+{
+  "postacie": [
+    {
+      "imię": "Harry Potter",
+      "pseudonimy": ["Chłopiec, Który Przeżył", "Wybraniec"],
+      "płeć": "mężczyzna",
+      "gatunek": "człowiek",
+      "dom": "Gryffindor",
+      "data_urodzenia": "31-07-1980",
+      "czarodziej": true,
+      "pochodzenie": "półkrwi",
+      "oczy": "zielone",
+      "włosy": "czarne",
+      "różdżka": "ostrokrzew, pióro feniksa, 11 cali",
+      "patronus": "jeleń",
+      "uczeń_hogwartu": true,
+      "pracownik_hogwartu": false,
+      "aktor": "Daniel Radcliffe",
+      "żyje": true,
+      "obraz": "https://ik.imagekit.io/hpapi/harry.jpg"
+    },
+    {
+      "imię": "Hermiona Granger",
+      "pseudonimy": ["Hermy", "Panna Wszystkowiedząca"],
+      "płeć": "kobieta",
+      "gatunek": "człowiek",
+      "dom": "Gryffindor",
+      "data_urodzenia": "19-09-1979",
+      "czarodziej": true,
+      "pochodzenie": "mugolak",
+      "oczy": "brązowe",
+      "włosy": "brązowe",
+      "różdżka": "winorośl, smocze serce, 10.75 cala",
+      "patronus": "wydra",
+      "uczeń_hogwartu": true,
+      "pracownik_hogwartu": false,
+      "aktor": "Emma Watson",
+      "żyje": true,
+      "obraz": "https://ik.imagekit.io/hpapi/hermione.jpeg"
+    },
+    {
+      "imię": "Ron Weasley",
+      "pseudonimy": ["Ronnie", "Wheezy"],
+      "płeć": "mężczyzna",
+      "gatunek": "człowiek",
+      "dom": "Gryffindor",
+      "data_urodzenia": "01-03-1980",
+      "czarodziej": true,
+      "pochodzenie": "czysta krew",
+      "oczy": "niebieskie",
+      "włosy": "rude",
+      "różdżka": "wierzba, włos z ogona jednorożca, 14 cali",
+      "patronus": "terier Jack Russell",
+      "uczeń_hogwartu": true,
+      "pracownik_hogwartu": false,
+      "aktor": "Rupert Grint",
+      "żyje": true,
+      "obraz": "https://ik.imagekit.io/hpapi/ron.jpg"
+    },
+    {
+      "imię": "Albus Dumbledore",
+      "pseudonimy": ["Profesor Dumbledore"],
+      "płeć": "mężczyzna",
+      "gatunek": "człowiek",
+      "dom": "Gryffindor",
+      "rok_urodzenia": 1881,
+      "czarodziej": true,
+      "pochodzenie": "półkrwi",
+      "oczy": "niebieskie",
+      "włosy": "srebrne",
+      "różdżka": "czarna różdżka (starsza)",
+      "patronus": "feniks",
+      "uczeń_hogwartu": false,
+      "pracownik_hogwartu": true,
+      "aktor": "Richard Harris, Michael Gambon",
+      "żyje": false,
+      "obraz": ""
+    },
+    {
+      "imię": "Severus Snape",
+      "pseudonimy": ["Książę Półkrwi"],
+      "płeć": "mężczyzna",
+      "gatunek": "człowiek",
+      "dom": "Slytherin",
+      "data_urodzenia": "09-01-1960",
+      "czarodziej": true,
+      "pochodzenie": "półkrwi",
+      "oczy": "czarne",
+      "włosy": "czarne",
+      "różdżka": "",
+      "patronus": "łania",
+      "uczeń_hogwartu": false,
+      "pracownik_hogwartu": true,
+      "aktor": "Alan Rickman",
+      "żyje": false,
+      "obraz": "https://ik.imagekit.io/hpapi/snape.jpg"
+    },
+    {
+      "imię": "Lord Voldemort",
+      "pseudonimy": ["Tom Riddle", "Ten-Którego-Imienia-Nie-Wolno-Wymawiać"],
+      "płeć": "mężczyzna",
+      "gatunek": "człowiek",
+      "dom": "Slytherin",
+      "data_urodzenia": "31-12-1926",
+      "czarodziej": true,
+      "pochodzenie": "półkrwi",
+      "oczy": "szkarłatne",
+      "włosy": "łysy",
+      "różdżka": "cis, pióro feniksa, 13.5 cala",
+      "patronus": null,
+      "uczeń_hogwartu": false,
+      "pracownik_hogwartu": false,
+      "aktor": "Ralph Fiennes",
+      "żyje": false,
+      "obraz": "https://ik.imagekit.io/hpapi/voldemort.jpg"
+    },
+    {
+      "imię": "Draco Malfoy",
+      "płeć": "mężczyzna",
+      "gatunek": "człowiek",
+      "dom": "Slytherin",
+      "data_urodzenia": "05-06-1980",
+      "czarodziej": true,
+      "pochodzenie": "czysta krew",
+      "oczy": "szare",
+      "włosy": "blond",
+      "różdżka": "głóg, włos z ogona jednorożca, 10 cali",
+      "patronus": null,
+      "uczeń_hogwartu": true,
+      "pracownik_hogwartu": false,
+      "aktor": "Tom Felton",
+      "żyje": true,
+      "obraz": "https://ik.imagekit.io/hpapi/draco.jpg"
+    },
+    {
+      "imię": "Sirius Black",
+      "pseudonimy": ["Łapa", "Snuffles"],
+      "płeć": "mężczyzna",
+      "gatunek": "człowiek",
+      "dom": "Gryffindor",
+      "data_urodzenia": "03-11-1959",
+      "czarodziej": true,
+      "pochodzenie": "czysta krew",
+      "oczy": "szare",
+      "włosy": "czarne",
+      "różdżka": "",
+      "patronus": "zając",
+      "uczeń_hogwartu": false,
+      "pracownik_hogwartu": false,
+      "aktor": "Gary Oldman",
+      "żyje": false,
+      "obraz": "https://ik.imagekit.io/hpapi/sirius.JPG"
+    },
+    {
+      "imię": "Rubeus Hagrid",
+      "pseudonimy": ["Profesor Hagrid"],
+      "płeć": "mężczyzna",
+      "gatunek": "pół-olbrzym",
+      "dom": "Gryffindor",
+      "data_urodzenia": "06-12-1928",
+      "czarodziej": true,
+      "pochodzenie": "półkrwi",
+      "oczy": "czarne",
+      "włosy": "czarne",
+      "różdżka": "dąb, długość 16 cali",
+      "patronus": null,
+      "uczeń_hogwartu": false,
+      "pracownik_hogwartu": true,
+      "aktor": "Robbie Coltrane",
+      "żyje": true,
+      "obraz": "https://ik.imagekit.io/hpapi/hagrid.png"
+    },
+    {
+      "imię": "Luna Lovegood",
+      "pseudonimy": ["Pomyluna Lovegood"],
+      "płeć": "kobieta",
+      "gatunek": "człowiek",
+      "dom": "Ravenclaw",
+      "data_urodzenia": "13-02-1981",
+      "czarodziej": true,
+      "pochodzenie": "czysta krew",
+      "oczy": "srebrne",
+      "włosy": "blond",
+      "różdżka": "",
+      "patronus": "zając",
+      "uczeń_hogwartu": true,
+      "pracownik_hogwartu": false,
+      "aktor": "Evanna Lynch",
+      "żyje": true,
+      "obraz": "https://ik.imagekit.io/hpapi/luna.jpg"
+    },
+    {
+      "imię": "Neville Longbottom",
+      "płeć": "mężczyzna",
+      "gatunek": "człowiek",
+      "dom": "Gryffindor",
+      "data_urodzenia": "30-07-1980",
+      "czarodziej": true,
+      "pochodzenie": "czysta krew",
+      "oczy": "",
+      "włosy": "blond",
+      "różdżka": "wiśnia, włos z ogona jednorożca, 13 cali",
+      "patronus": "niematerialny",
+      "uczeń_hogwartu": true,
+      "pracownik_hogwartu": false,
+      "aktor": "Matthew Lewis",
+      "żyje": true,
+      "obraz": "https://ik.imagekit.io/hpapi/neville.jpg"
+    },
+    {
+      "imię": "Ginny Weasley",
+      "płeć": "kobieta",
+      "gatunek": "człowiek",
+      "dom": "Gryffindor",
+      "data_urodzenia": "11-08-1981",
+      "czarodziej": true,
+      "pochodzenie": "czysta krew",
+      "oczy": "brązowe",
+      "włosy": "rude",
+      "różdżka": "cis",
+      "patronus": "koń",
+      "uczeń_hogwartu": true,
+      "pracownik_hogwartu": false,
+      "aktor": "Bonnie Wright",
+      "żyje": true,
+      "obraz": "https://ik.imagekit.io/hpapi/ginny.jpg"
+    },
+    {
+      "imię": "Remus Lupin",
+      "pseudonimy": ["Moony"],
+      "płeć": "mężczyzna",
+      "gatunek": "wilkołak",
+      "dom": "Gryffindor",
+      "data_urodzenia": "10-03-1960",
+      "czarodziej": true,
+      "pochodzenie": "półkrwi",
+      "oczy": "zielone",
+      "włosy": "brązowe",
+      "różdżka": "cyprys, włos z ogona jednorożca, 10.25 cala",
+      "patronus": "wilk",
+      "uczeń_hogwartu": false,
+      "pracownik_hogwartu": true,
+      "aktor": "David Thewlis",
+      "żyje": false,
+      "obraz": "https://ik.imagekit.io/hpapi/lupin.jpg"
+    },
+    {
+      "imię": "Bellatrix Lestrange",
+      "pseudonimy": ["Bella"],
+      "płeć": "kobieta",
+      "gatunek": "człowiek",
+      "dom": "Slytherin",
+      "rok_urodzenia": 1951,
+      "czarodziej": true,
+      "pochodzenie": "czysta krew",
+      "oczy": "brązowe",
+      "włosy": "czarne",
+      "różdżka": "orzech, smocze serce, 12.75 cala",
+      "patronus": null,
+      "uczeń_hogwartu": false,
+      "pracownik_hogwartu": false,
+      "aktor": "Helena Bonham Carter",
+      "żyje": false,
+      "obraz": "https://ik.imagekit.io/hpapi/bellatrix.jpg"
+    },
+    {
+      "imię": "Cho Chang",
+      "płeć": "kobieta",
+      "gatunek": "człowiek",
+      "dom": "Ravenclaw",
+      "data_urodzenia": "07-04-1979",
+      "czarodziej": true,
+      "pochodzenie": "",
+      "oczy": "brązowe",
+      "włosy": "czarne",
+      "różdżka": "",
+      "patronus": "łabędź",
+      "uczeń_hogwartu": true,
+      "pracownik_hogwartu": false,
+      "aktor": "Katie Leung",
+      "żyje": true,
+      "obraz": "https://ik.imagekit.io/hpapi/cho.jpg"
+    },
+    {
+      "imię": "Fred Weasley",
+      "płeć": "mężczyzna",
+      "gatunek": "człowiek",
+      "dom": "Gryffindor",
+      "data_urodzenia": "",
+      "czarodziej": true,
+      "pochodzenie": "czysta krew",
+      "oczy": "",
+      "włosy": "rude",
+      "różdżka": "",
+      "patronus": "",
+      "uczeń_hogwartu": true,
+      "pracownik_hogwartu": false,
+      "aktor": "James Phelps",
+      "żyje": false,
+      "obraz": ""
+    },
+    {
+      "imię": "George Weasley",
+      "płeć": "mężczyzna",
+      "gatunek": "człowiek",
+      "dom": "Gryffindor",
+      "data_urodzenia": "",
+      "czarodziej": true,
+      "pochodzenie": "czysta krew",
+      "oczy": "",
+      "włosy": "rude",
+      "różdżka": "",
+      "patronus": "",
+      "uczeń_hogwartu": true,
+      "pracownik_hogwartu": false,
+      "aktor": "Oliver Phelps",
+      "żyje": true,
+      "obraz": ""
+    },
+    {
+      "imię": "Dolores Umbridge",
+      "płeć": "kobieta",
+      "gatunek": "człowiek",
+      "dom": "Slytherin",
+      "data_urodzenia": "",
+      "czarodziej": true,
+      "pochodzenie": "półkrwi",
+      "oczy": "brązowe",
+      "włosy": "siwe",
+      "różdżka": "brzoza, smocze serce, 8 cali",
+      "patronus": "kot perski",
+      "uczeń_hogwartu": false,
+      "pracownik_hogwartu": true,
+      "aktor": "Imelda Staunton",
+      "żyje": true,
+      "obraz": "https://ik.imagekit.io/hpapi/umbridge.jpg"
+    },
+    {
+      "imię": "Minerva McGonagall",
+      "płeć": "kobieta",
+      "gatunek": "człowiek",
+      "dom": "Gryffindor",
+      "data_urodzenia": "04-10-1925",
+      "czarodziej": true,
+      "pochodzenie": "półkrwi",
+      "oczy": "",
+      "włosy": "czarne",
+      "różdżka": "jodła, smocze serce, 9.5 cala",
+      "patronus": "kot pręgowany",
+      "uczeń_hogwartu": false,
+      "pracownik_hogwartu": true,
+      "aktor": "Maggie Smith",
+      "żyje": true,
+      "obraz": "https://ik.imagekit.io/hpapi/mcgonagall.jpg"
+    },
+    {
+      "imię": "Lucjusz Malfoy",
+      "pseudonimy": [],
+      "płeć": "mężczyzna",
+      "gatunek": "człowiek",
+      "dom": "Slytherin",
+      "data_urodzenia": null,
+      "czarodziej": true,
+      "pochodzenie": "czysta krew",
+      "oczy": "szare",
+      "włosy": "blond",
+      "różdżka": "wiąz, struna serca smoka, 18 cali",
+      "patronus": "",
+      "uczeń_hogwartu": false,
+      "pracownik_hogwartu": false,
+      "aktor": "Jason Isaacs",
+      "żyje": true,
+      "obraz": "https://ik.imagekit.io/hpapi/lucius.jpg"
+    },
+    {
+      "imię": "Vincent Crabbe",
+      "pseudonimy": [],
+      "płeć": "mężczyzna",
+      "gatunek": "człowiek",
+      "dom": "Slytherin",
+      "data_urodzenia": null,
+      "czarodziej": true,
+      "pochodzenie": "czysta krew",
+      "oczy": "czarne",
+      "włosy": "czarne",
+      "różdżka": "brak danych",
+      "patronus": "",
+      "uczeń_hogwartu": true,
+      "pracownik_hogwartu": false,
+      "aktor": "Jamie Waylett",
+      "żyje": false,
+      "obraz": "https://ik.imagekit.io/hpapi/crabbe.jpg"
+    }
+  ],
+  "zaklęcia": {
+    "Podstawowe zaklęcia": [
+      {
+        "name": "Lumos",
+        "description": "Oświetla różdżkę czarodzieja"
+      },
+      {
+        "name": "Nox",
+        "description": "Wyłącza światło różdżki"
+      },
+      {
+        "name": "Wingardium Leviosa",
+        "description": "Powoduje lewitację przedmiotu"
+      },
+      {
+        "name": "Expelliarmus",
+        "description": "Rozbraja przeciwnika"
+      },
+      {
+        "name": "Alohomora",
+        "description": "Otwiera zamknięte drzwi"
+      },
+      {
+        "name": "Accio",
+        "description": "Przywołuje przedmioty"
+      },
+      {
+        "name": "Reparo",
+        "description": "Naprawia zepsute przedmioty"
+      },
+      {
+        "name": "Aguamenti",
+        "description": "Przywołuje wodę"
+      }
+    ],
+    "Zaklęcia obronne": [
+      {
+        "name": "Expecto Patronum",
+        "description": "Odpędza Dementorów, tworząc materialnego lub niematerialnego patronusa"
+      },
+      {
+        "name": "Protego",
+        "description": "Tworzy niewidzialną tarczę ochronną"
+      },
+      {
+        "name": "Stupefy",
+        "description": "Ogłusza przeciwnika"
+      },
+      {
+        "name": "Petrificus Totalus",
+        "description": "Całkowicie paraliżuje przeciwnika"
+      },
+      {
+        "name": "Impedimenta",
+        "description": "Spowalnia ruch przeciwnika"
+      },
+      {
+        "name": "Riddikulus",
+        "description": "Przekształca bogarta w śmieszną formę"
+      }
+    ],
+    "Zaklęcia lecznicze": [
+      {
+        "name": "Episkey",
+        "description": "Leczy drobne urazy"
+      },
+      {
+        "name": "Brackium Emendo",
+        "description": "Leczy złamane kości"
+      },
+      {
+        "name": "Anapneo",
+        "description": "Udrażnia drogi oddechowe"
+      },
+      {
+        "name": "Ferula",
+        "description": "Tworzy bandaże na rany"
+      },
+      {
+        "name": "Reparifors",
+        "description": "Leczy magiczne dolegliwości"
+      },
+      {
+        "name": "Oculus Reparo",
+        "description": "Naprawia okulary"
+      }
+    ],
+    "Zaklęcia transportowe": [
+      {
+        "name": "Apparate",
+        "description": "Natychmiastowe przemieszczenie się w inne miejsce"
+      },
+      {
+        "name": "Disapparate",
+        "description": "Natychmiastowe opuszczenie aktualnej lokalizacji"
+      },
+      {
+        "name": "Ascendio",
+        "description": "Wyrzuca czarodzieja w powietrze"
+      }
+    ],
+    "Zaklęcia ofensywne": [
+      {
+        "name": "Sectumsempra",
+        "description": "Powoduje głębokie rany cięte"
+      },
+      {
+        "name": "Reducto",
+        "description": "Niszczy przedmioty"
+      },
+      {
+        "name": "Incendio",
+        "description": "Przywołuje ogień"
+      },
+      {
+        "name": "Bombardo",
+        "description": "Tworzy eksplozję"
+      },
+      {
+        "name": "Confundo",
+        "description": "Wywołuje zamęt w umyśle celu"
+      },
+      {
+        "name": "Levicorpus",
+        "description": "Unosi przeciwnika za kostkę"
+      }
+    ],
+    "Zaklęcia komunikacji i ukrywania": [
+      {
+        "name": "Muffliato",
+        "description": "Uniemożliwia podsłuchiwanie"
+      },
+      {
+        "name": "Sonorus",
+        "description": "Wzmacnia głos czarodzieja"
+      },
+      {
+        "name": "Silencio",
+        "description": "Ucisza cel"
+      },
+      {
+        "name": "Homenum Revelio",
+        "description": "Ujawnia obecność innych osób"
+      },
+      {
+        "name": "Disillusionment Charm",
+        "description": "Maskuje cel, by wtapiał się w otoczenie"
+      },
+      {
+        "name": "Fidelius Charm",
+        "description": "Ukrywa sekret w duszy Strażnika Tajemnicy"
+      }
+    ],
+    "Zaklęcia transformacji": [
+      {
+        "name": "Evanesco",
+        "description": "Znika przedmioty"
+      },
+      {
+        "name": "Geminio",
+        "description": "Powiela przedmioty"
+      },
+      {
+        "name": "Engorgio",
+        "description": "Powoduje szybki wzrost obiektu"
+      },
+      {
+        "name": "Reducio",
+        "description": "Zmniejsza powiększony obiekt"
+      },
+      {
+        "name": "Crinus Muto",
+        "description": "Zmienia kolor i styl włosów"
+      },
+      {
+        "name": "Glisseo",
+        "description": "Zamienia schody w zjeżdżalnię"
+      }
+    ],
+    "Zaklęcia niewybaczalne": [
+      {
+        "name": "Avada Kedavra",
+        "description": "Zaklęcie zabójcze"
+      },
+      {
+        "name": "Crucio",
+        "description": "Powoduje nieznośny ból"
+      },
+      {
+        "name": "Imperio",
+        "description": "Daje całkowitą kontrolę nad celem"
+      }
+    ],
+    "Inne przydatne zaklęcia": [
+      {
+        "name": "Capacious Extremis",
+        "description": "Rozszerza pojemność przedmiotów bez zmiany ich zewnętrznego wyglądu"
+      },
+      {
+        "name": "Scourgify",
+        "description": "Czyści przedmioty"
+      },
+      {
+        "name": "Avis",
+        "description": "Przywołuje stado ptaków"
+      },
+      {
+        "name": "Serpensortia",
+        "description": "Przywołuje węża"
+      },
+      {
+        "name": "Tarantallegra",
+        "description": "Powoduje niekontrolowany taniec"
+      },
+      {
+        "name": "Piertotum Locomotor",
+        "description": "Ożywia posągi i przedmioty"
+      },
+      {
+        "name": "Obliviate",
+        "description": "Wymazuje wspomnienia"
+      }
+    ]
   }
-]
+}
