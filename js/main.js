@@ -5,47 +5,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const themeToggle = document.querySelector('.theme-toggle');
     const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
 
-    // Funkcja do usuwania polskich znaków
-    function removePolishChars(str) {
-        return str
-            .toLowerCase()
-            .replace(/[ąćęłńóśźż]/g, function(match) {
-                const replacements = {
-                    'ą': 'a',
-                    'ć': 'c',
-                    'ę': 'e',
-                    'ł': 'l',
-                    'ń': 'n',
-                    'ó': 'o',
-                    'ś': 's',
-                    'ź': 'z',
-                    'ż': 'z'
-                };
-                return replacements[match] || match;
-            });
-    }
-
-    // Funkcja wyszukiwania postaci
-    function searchCharacters() {
-        const searchTerm = document.getElementById('character-search').value;
-        const houseFilter = document.getElementById('house-filter').value;
-        const normalizedSearchTerm = removePolishChars(searchTerm);
-        
-        document.querySelectorAll('.character-card').forEach(card => {
-            const characterName = card.querySelector('h3').textContent;
-            const characterHouse = card.querySelector('.house').textContent;
-            const normalizedCharacterName = removePolishChars(characterName);
-            
-            const matchesSearch = normalizedSearchTerm === '' || 
-                                 normalizedCharacterName.includes(normalizedSearchTerm);
-            const matchesHouse = houseFilter === '' || characterHouse.includes(houseFilter);
-            
-            if (matchesSearch && matchesHouse) {
-                card.style.display = 'block';
-            } else {
-                card.style.display = 'none';
-            }
-        });
+    // Funkcja pomocnicza: usuwanie znaków diakrytycznych
+    function removeDiacritics(text) {
+        const replacements = {
+            'ą': 'a', 'ć': 'c', 'ę': 'e', 'ł': 'l', 'ń': 'n',
+            'ó': 'o', 'ś': 's', 'ź': 'z', 'ż': 'z',
+            'Ą': 'A', 'Ć': 'C', 'Ę': 'E', 'Ł': 'L', 'Ń': 'N',
+            'Ó': 'O', 'Ś': 'S', 'Ź': 'Z', 'Ż': 'Z'
+        };
+        return text.replace(/[ąćęłńóśźżĄĆĘŁŃÓŚŹŻ]/g, char => replacements[char] || char);
     }
 
     // 1. Obsługa motywu (jasny/ciemny)
@@ -168,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ]
     };
 
-    // 5. Poprawiona inicjalizacja akordeonu z zaklęciami
+    // 5. Poprawiona inicjalizacja akordeonu z zaklęciami (z zastosowaniem removeDiacritics)
     function initSpellsAccordion() {
         const accordionButtons = document.querySelectorAll('.accordion-btn');
         
@@ -234,13 +202,13 @@ document.addEventListener('DOMContentLoaded', () => {
             
             content.innerHTML = `
                 <div class="spells-content-wrapper">
-                    <h3 class="spells-category-title">${title} <span class="spells-count">(${sortedSpells.length})</span></h3>
+                    <h3 class="spells-category-title">${removeDiacritics(title)} <span class="spells-count">(${sortedSpells.length})</span></h3>
                     <ul class="spells-list" role="list">
                         ${sortedSpells.map(spell => `
                             <li class="spell-item" role="listitem">
                                 <div class="spell-card">
-                                    <span class="spell-name">${spell.name}</span>
-                                    <span class="spell-description">${spell.description}</span>
+                                    <span class="spell-name">${removeDiacritics(spell.name)}</span>
+                                    <span class="spell-description">${removeDiacritics(spell.description)}</span>
                                 </div>
                             </li>
                         `).join('')}
@@ -284,18 +252,4 @@ document.addEventListener('DOMContentLoaded', () => {
     initSpellsAccordion();
     initScrollAnimations();
     initNavbarScrollEffect();
-
-    // Inicjalizacja wyszukiwania
-    if (document.getElementById('character-search')) {
-        document.getElementById('character-search').addEventListener('input', searchCharacters);
-    }
-    if (document.getElementById('house-filter')) {
-        document.getElementById('house-filter').addEventListener('change', searchCharacters);
-    }
-    if (document.getElementById('sort-characters')) {
-        document.getElementById('sort-characters').addEventListener('click', function() {
-            // Tutaj można dodać funkcję sortowania
-            alert('Funkcja sortowania zostanie zaimplementowana później!');
-        });
-    }
 });

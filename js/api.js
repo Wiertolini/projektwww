@@ -1,59 +1,77 @@
 let controller = new AbortController();
-let allCharacters = []; 
+let allCharacters = [];
+let allSpells = [];
 let currentSort = 'asc';
 
-async function fetchCharacters() {
+async function fetchData() {
     try {
         const response = await fetch('bazadanych.json');
         if (!response.ok) {
-            throw new Error('Nie udało się pobrać danych postaci');
+            throw new Error('Nie udało się pobrać danych');
         }
-        const data = await response.json();
-
-        // Mapowanie wszystkich postaci z pliku JSON
-        const characters = data.map((character, index) => {
-            let imageUrl = character.obraz || '';
-            
-            if (!imageUrl || imageUrl.includes('undefined')) {
-                imageUrl = 'zdj/default.png';
-            }
-
-            return {
-                    id: `char-${index}`,
-                    name: character.imię || 'Nieznana postać',
-                    house: character.dom || 'Brak domu',
-                    image: imageUrl,
-                    dateOfBirth: character.data_urodzenia || character.rok_urodzenia || 'Nieznana',
-                    ancestry: character.pochodzenie || 'Nieznane',
-                    patronus: character.patronus || 'Brak',
-                    description: `
-                        Imię: ${character.imię || 'Nieznane'},
-                        Pseudonimy: ${character.pseudonimy ? character.pseudonimy.join(', ') : 'Brak'},
-                        Płeć: ${character.płeć || 'Nieznana'},
-                        Gatunek: ${character.gatunek || 'Nieznany'},
-                        Dom: ${character.dom || 'Brak domu'},
-                        Data urodzenia: ${character.data_urodzenia || 'Nieznana'},
-                        Czarodziej: ${character.czarodziej ? 'Tak' : 'Nie'},
-                        Pochodzenie: ${character.pochodzenie || 'Nieznane'},
-                        Kolor oczu: ${character.oczy || 'Nieznany'},
-                        Kolor włosów: ${character.włosy || 'Nieznany'},
-                        Różdżka: ${character.różdżka || 'Brak informacji'},
-                        Patronus: ${character.patronus || 'Brak'},
-                        Uczeń Hogwartu: ${character.uczeń_hogwartu ? 'Tak' : 'Nie'},
-                        Pracownik Hogwartu: ${character.pracownik_hogwartu ? 'Tak' : 'Nie'},
-                        Aktor: ${character.aktor || 'Nieznany'},
-                        Status: ${character.żyje ? 'Żyje' : 'Nie żyje'}
-                    `
-                    };
-        });
-
-        return characters;
-
+        return await response.json();
     } catch (error) {
-        console.error('Błąd podczas pobierania postaci:', error);
-        showErrorModal('Nie udało się załadować postaci. Spróbuj ponownie później.');
-        return [];
+        console.error('Błąd podczas pobierania danych:', error);
+        showErrorModal('Nie udało się załadować danych. Spróbuj ponownie później.');
+        return null;
     }
+}
+
+async function fetchCharacters() {
+    const data = await fetchData();
+    if (!data || !data.postacie) return [];
+
+    return data.postacie.map((character, index) => {
+        let imageUrl = character.obraz || '';
+        
+        if (!imageUrl || imageUrl.includes('undefined')) {
+            imageUrl = 'zdj/default.png';
+        }
+
+        return {
+            id: `char-${index}`,
+            name: character.imię || 'Nieznana postać',
+            house: character.dom || 'Brak domu',
+            image: imageUrl,
+            dateOfBirth: character.data_urodzenia || character.rok_urodzenia || 'Nieznana',
+            ancestry: character.pochodzenie || 'Nieznane',
+            patronus: character.patronus || 'Brak',
+            description: `
+                Imię: ${character.imię || 'Nieznane'},
+                Pseudonimy: ${character.pseudonimy ? character.pseudonimy.join(', ') : 'Brak'},
+                Płeć: ${character.płeć || 'Nieznana'},
+                Gatunek: ${character.gatunek || 'Nieznany'},
+                Dom: ${character.dom || 'Brak domu'},
+                Data urodzenia: ${character.data_urodzenia || 'Nieznana'},
+                Czarodziej: ${character.czarodziej ? 'Tak' : 'Nie'},
+                Pochodzenie: ${character.pochodzenie || 'Nieznane'},
+                Kolor oczu: ${character.oczy || 'Nieznany'},
+                Kolor włosów: ${character.włosy || 'Nieznany'},
+                Różdżka: ${character.różdżka || 'Brak informacji'},
+                Patronus: ${character.patronus || 'Brak'},
+                Uczeń Hogwartu: ${character.uczeń_hogwartu ? 'Tak' : 'Nie'},
+                Pracownik Hogwartu: ${character.pracownik_hogwartu ? 'Tak' : 'Nie'},
+                Aktor: ${character.aktor || 'Nieznany'},
+                Status: ${character.żyje ? 'Żyje' : 'Nie żyje'}
+            `
+        };
+    });
+}
+
+async function fetchSpells() {
+    const data = await fetchData();
+    if (!data || !data.zaklęcia) return [];
+
+    let spells = [];
+    for (const category in data.zaklęcia) {
+        if (data.zaklęcia.hasOwnProperty(category)) {
+            spells = spells.concat(data.zaklęcia[category].map(spell => ({
+                ...spell,
+                category: category
+            })));
+        }
+    }
+    return spells;
 }
 
 function filterAndSortCharacters(characters, searchTerm, houseFilter, sortOrder) {
@@ -75,8 +93,22 @@ function filterAndSortCharacters(characters, searchTerm, houseFilter, sortOrder)
         });
 }
 
+function filterSpells(spells, searchTerm, categoryFilter) {
+    if (!spells || !Array.isArray(spells)) return [];
+
+    return spells.filter(spell => {
+        const matchesSearch = !searchTerm || 
+            spell.name.toLowerCase().includes(searchTerm.toLowerCase());
+        const matchesCategory = !categoryFilter || 
+            spell.category.toLowerCase().includes(categoryFilter.toLowerCase());
+        return matchesSearch && matchesCategory;
+    });
+}
+
 function displayCharacters(characters) {
     const container = document.getElementById('characters-container');
+    if (!container) return;
+    
     container.innerHTML = '';
 
     if (characters.length === 0) {
@@ -106,7 +138,6 @@ function displayCharacters(characters) {
         container.appendChild(card);
     });
 
-    // Dodajemy event listenery do przycisków
     document.querySelectorAll('.details-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -115,21 +146,61 @@ function displayCharacters(characters) {
         });
     });
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
-        });
-    }, { threshold: 0.1 });
+    initScrollAnimations();
+}
 
-    document.querySelectorAll('.scroll-animation').forEach(el => observer.observe(el));
+function displaySpells(spells) {
+    const container = document.getElementById('spells-container');
+    if (!container) return;
+    
+    container.innerHTML = '';
+
+    if (spells.length === 0) {
+        container.innerHTML = '<p class="no-results">Nie znaleziono pasujących zaklęć</p>';
+        return;
+    }
+
+    // Grupowanie zaklęć po kategoriach
+    const spellsByCategory = spells.reduce((acc, spell) => {
+        if (!acc[spell.category]) {
+            acc[spell.category] = [];
+        }
+        acc[spell.category].push(spell);
+        return acc;
+    }, {});
+
+    for (const category in spellsByCategory) {
+        const categoryContainer = document.createElement('div');
+        categoryContainer.className = 'spells-category';
+        
+        const categoryTitle = document.createElement('h3');
+        categoryTitle.textContent = category;
+        categoryContainer.appendChild(categoryTitle);
+
+        const spellsList = document.createElement('div');
+        spellsList.className = 'spells-list';
+
+        spellsByCategory[category].forEach(spell => {
+            const spellElement = document.createElement('div');
+            spellElement.className = 'spell-card scroll-animation';
+            spellElement.innerHTML = `
+                <h4>${spell.name}</h4>
+                <p>${spell.description}</p>
+                <span class="spell-category">${category}</span>
+            `;
+            spellsList.appendChild(spellElement);
+        });
+
+        categoryContainer.appendChild(spellsList);
+        container.appendChild(categoryContainer);
+    }
+
+    initScrollAnimations();
 }
 
 function showCharacterDetails(characterId) {
     try {
         const character = allCharacters.find(c => c.id === characterId);
-
         if (!character) throw new Error('Postać nie została znaleziona');
 
         const modal = document.getElementById('character-modal');
@@ -154,70 +225,22 @@ function showCharacterDetails(characterId) {
                     <p>${character.description}</p>
                 </div>
             </div>
+            <button class="close-modal-btn">Zamknij</button>
         `;
 
         modal.style.display = 'block';
 
-        // Zamknięcie modala po kliknięciu na tło
         modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
+            if (e.target === modal || e.target.classList.contains('close-modal-btn')) {
                 modal.style.display = 'none';
             }
         });
-
-        // Zamknięcie modala przyciskiem
-        const closeBtn = document.createElement('button');
-        closeBtn.textContent = 'Zamknij';
-        closeBtn.className = 'close-modal-btn';
-        closeBtn.addEventListener('click', () => {
-            modal.style.display = 'none';
-        });
-        modalBody.appendChild(closeBtn);
 
     } catch (error) {
         console.error('Błąd:', error);
         showErrorModal('Nie udało się załadować szczegółów postaci.');
     }
 }
-
-document.addEventListener('DOMContentLoaded', async () => {
-    allCharacters = await fetchCharacters();
-    displayCharacters(allCharacters);
-
-    document.getElementById('character-search').addEventListener('input', (e) => {
-        const searchTerm = e.target.value;
-        const filtered = filterAndSortCharacters(
-            allCharacters,
-            searchTerm,
-            document.getElementById('house-filter').value,
-            currentSort
-        );
-        displayCharacters(filtered);
-    });
-
-    document.getElementById('house-filter').addEventListener('change', (e) => {
-        const filtered = filterAndSortCharacters(
-            allCharacters,
-            document.getElementById('character-search').value,
-            e.target.value,
-            currentSort
-        );
-        displayCharacters(filtered);
-    });
-
-    document.getElementById('sort-characters').addEventListener('click', () => {
-        currentSort = currentSort === 'asc' ? 'desc' : 'asc';
-        const filtered = filterAndSortCharacters(
-            allCharacters,
-            document.getElementById('character-search').value,
-            document.getElementById('house-filter').value,
-            currentSort
-        );
-        displayCharacters(filtered);
-        document.getElementById('sort-characters').textContent = 
-            currentSort === 'asc' ? 'Sortuj A-Z' : 'Sortuj Z-A';
-    });
-});
 
 function showErrorModal(message) {
     const errorModal = document.createElement('div');
@@ -236,19 +259,92 @@ function showErrorModal(message) {
 }
 
 function initScrollAnimations() {
-    const animatedElements = document.querySelectorAll('.scroll-animation');
-    
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('animate');
+                entry.target.classList.add('visible');
                 observer.unobserve(entry.target);
             }
         });
     }, { threshold: 0.1 });
     
-    animatedElements.forEach(el => observer.observe(el));
+    document.querySelectorAll('.scroll-animation').forEach(el => observer.observe(el));
 }
 
-// Inicjalizacja animacji
-initScrollAnimations();
+document.addEventListener('DOMContentLoaded', async () => {
+    // Ładowanie postaci
+    allCharacters = await fetchCharacters();
+    displayCharacters(allCharacters);
+
+    // Ładowanie zaklęć
+    allSpells = await fetchSpells();
+    if (document.getElementById('spells-container')) {
+        displaySpells(allSpells);
+    }
+
+    // Obsługa wyszukiwania postaci
+    if (document.getElementById('character-search')) {
+        document.getElementById('character-search').addEventListener('input', (e) => {
+            const filtered = filterAndSortCharacters(
+                allCharacters,
+                e.target.value,
+                document.getElementById('house-filter').value,
+                currentSort
+            );
+            displayCharacters(filtered);
+        });
+    }
+
+    // Obsługa filtrowania po domu
+    if (document.getElementById('house-filter')) {
+        document.getElementById('house-filter').addEventListener('change', (e) => {
+            const filtered = filterAndSortCharacters(
+                allCharacters,
+                document.getElementById('character-search').value,
+                e.target.value,
+                currentSort
+            );
+            displayCharacters(filtered);
+        });
+    }
+
+    // Obsługa sortowania
+    if (document.getElementById('sort-characters')) {
+        document.getElementById('sort-characters').addEventListener('click', () => {
+            currentSort = currentSort === 'asc' ? 'desc' : 'asc';
+            const filtered = filterAndSortCharacters(
+                allCharacters,
+                document.getElementById('character-search').value,
+                document.getElementById('house-filter').value,
+                currentSort
+            );
+            displayCharacters(filtered);
+            document.getElementById('sort-characters').textContent = 
+                currentSort === 'asc' ? 'Sortuj A-Z' : 'Sortuj Z-A';
+        });
+    }
+
+    // Obsługa wyszukiwania zaklęć
+    if (document.getElementById('spell-search')) {
+        document.getElementById('spell-search').addEventListener('input', (e) => {
+            const filtered = filterSpells(
+                allSpells,
+                e.target.value,
+                document.getElementById('spell-category-filter').value
+            );
+            displaySpells(filtered);
+        });
+    }
+
+    // Obsługa filtrowania zaklęć po kategorii
+    if (document.getElementById('spell-category-filter')) {
+        document.getElementById('spell-category-filter').addEventListener('change', (e) => {
+            const filtered = filterSpells(
+                allSpells,
+                document.getElementById('spell-search').value,
+                e.target.value
+            );
+            displaySpells(filtered);
+        });
+    }
+});
