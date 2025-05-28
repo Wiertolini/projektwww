@@ -1,5 +1,5 @@
 let controller = new AbortController();
-let allCharacters = []; // Przeniosłem tutaj, aby mieć globalny dostęp
+let allCharacters = []; 
 let currentSort = 'asc';
 
 async function fetchCharacters() {
@@ -15,22 +15,36 @@ async function fetchCharacters() {
             let imageUrl = character.obraz || '';
             
             if (!imageUrl || imageUrl.includes('undefined')) {
-                imageUrl = 'assets/images/default-character.jpg';
+                imageUrl = 'zdj/default.png';
             }
 
             return {
-                id: `char-${index}`, // Używam indeksu jako części ID dla spójności
-                name: character.imię || 'Nieznana postać',
-                house: character.dom || 'Brak domu',
-                image: imageUrl,
-                dateOfBirth: character.data_urodzenia || character.rok_urodzenia || 'Nieznana',
-                ancestry: character.pochodzenie || 'Nieznane',
-                patronus: character.patronus || 'Brak',
-                description: `Czarodziej: ${character.czarodziej ? 'Tak' : 'Nie'}, 
-                             Płeć: ${character.płeć || 'Nieznana'}, 
-                             Gatunek: ${character.gatunek || 'Nieznany'},
-                             Aktor: ${character.aktor || 'Nieznany'}`
-            };
+                    id: `char-${index}`,
+                    name: character.imię || 'Nieznana postać',
+                    house: character.dom || 'Brak domu',
+                    image: imageUrl,
+                    dateOfBirth: character.data_urodzenia || character.rok_urodzenia || 'Nieznana',
+                    ancestry: character.pochodzenie || 'Nieznane',
+                    patronus: character.patronus || 'Brak',
+                    description: `
+                        Imię: ${character.imię || 'Nieznane'},
+                        Pseudonimy: ${character.pseudonimy ? character.pseudonimy.join(', ') : 'Brak'},
+                        Płeć: ${character.płeć || 'Nieznana'},
+                        Gatunek: ${character.gatunek || 'Nieznany'},
+                        Dom: ${character.dom || 'Brak domu'},
+                        Data urodzenia: ${character.data_urodzenia || character.rok_urodzenia || 'Nieznana'},
+                        Czarodziej: ${character.czarodziej ? 'Tak' : 'Nie'},
+                        Pochodzenie: ${character.pochodzenie || 'Nieznane'},
+                        Kolor oczu: ${character.oczy || 'Nieznany'},
+                        Kolor włosów: ${character.włosy || 'Nieznany'},
+                        Różdżka: ${character.różdżka || 'Brak informacji'},
+                        Patronus: ${character.patronus || 'Brak'},
+                        Uczeń Hogwartu: ${character.uczeń_hogwartu ? 'Tak' : 'Nie'},
+                        Pracownik Hogwartu: ${character.pracownik_hogwartu ? 'Tak' : 'Nie'},
+                        Aktor: ${character.aktor || 'Nieznany'},
+                        Status: ${character.żyje ? 'Żyje' : 'Nie żyje'}
+                    `
+                    };
         });
 
         return characters;

@@ -330,7 +330,7 @@ body {
 }
 
 .house.Ravenclaw {
-    color: #193ba9;
+    color: #355ee7;
 }
 
 .details-btn {
@@ -704,10 +704,6 @@ textarea.error {
 
 .social-icons a.facebook {
     background-color: #3b5998;
-}
-
-.social-icons a.twitter {
-    background-color: #1da1f2;
 }
 
 .social-icons a.instagram {

@@ -5,6 +5,49 @@ document.addEventListener('DOMContentLoaded', () => {
     const themeToggle = document.querySelector('.theme-toggle');
     const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
 
+    // Funkcja do usuwania polskich znaków
+    function removePolishChars(str) {
+        return str
+            .toLowerCase()
+            .replace(/[ąćęłńóśźż]/g, function(match) {
+                const replacements = {
+                    'ą': 'a',
+                    'ć': 'c',
+                    'ę': 'e',
+                    'ł': 'l',
+                    'ń': 'n',
+                    'ó': 'o',
+                    'ś': 's',
+                    'ź': 'z',
+                    'ż': 'z'
+                };
+                return replacements[match] || match;
+            });
+    }
+
+    // Funkcja wyszukiwania postaci
+    function searchCharacters() {
+        const searchTerm = document.getElementById('character-search').value;
+        const houseFilter = document.getElementById('house-filter').value;
+        const normalizedSearchTerm = removePolishChars(searchTerm);
+        
+        document.querySelectorAll('.character-card').forEach(card => {
+            const characterName = card.querySelector('h3').textContent;
+            const characterHouse = card.querySelector('.house').textContent;
+            const normalizedCharacterName = removePolishChars(characterName);
+            
+            const matchesSearch = normalizedSearchTerm === '' || 
+                                 normalizedCharacterName.includes(normalizedSearchTerm);
+            const matchesHouse = houseFilter === '' || characterHouse.includes(houseFilter);
+            
+            if (matchesSearch && matchesHouse) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
     // 1. Obsługa motywu (jasny/ciemny)
     function initTheme() {
         const savedTheme = localStorage.getItem('theme');
@@ -72,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 4. Rozszerzone dane zaklęć
-  const spellsData = {
+    const spellsData = {
         defensive: [
             { name: "Protego", description: "Tworzy magiczną tarczę odbijającą zaklęcia" },
             { name: "Expecto Patronum", description: "Przywołuje patronusa do obrony przed dementorami" },
@@ -241,4 +284,18 @@ document.addEventListener('DOMContentLoaded', () => {
     initSpellsAccordion();
     initScrollAnimations();
     initNavbarScrollEffect();
+
+    // Inicjalizacja wyszukiwania
+    if (document.getElementById('character-search')) {
+        document.getElementById('character-search').addEventListener('input', searchCharacters);
+    }
+    if (document.getElementById('house-filter')) {
+        document.getElementById('house-filter').addEventListener('change', searchCharacters);
+    }
+    if (document.getElementById('sort-characters')) {
+        document.getElementById('sort-characters').addEventListener('click', function() {
+            // Tutaj można dodać funkcję sortowania
+            alert('Funkcja sortowania zostanie zaimplementowana później!');
+        });
+    }
 });
