@@ -5,17 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const themeToggle = document.querySelector('.theme-toggle');
     const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
 
-    // Funkcja pomocnicza: usuwanie znaków diakrytycznych
-    function removeDiacritics(text) {
-        const replacements = {
-            'ą': 'a', 'ć': 'c', 'ę': 'e', 'ł': 'l', 'ń': 'n',
-            'ó': 'o', 'ś': 's', 'ź': 'z', 'ż': 'z',
-            'Ą': 'A', 'Ć': 'C', 'Ę': 'E', 'Ł': 'L', 'Ń': 'N',
-            'Ó': 'O', 'Ś': 'S', 'Ź': 'Z', 'Ż': 'Z'
-        };
-        return text.replace(/[ąćęłńóśźżĄĆĘŁŃÓŚŹŻ]/g, char => replacements[char] || char);
-    }
-
     // 1. Obsługa motywu (jasny/ciemny)
     function initTheme() {
         const savedTheme = localStorage.getItem('theme');

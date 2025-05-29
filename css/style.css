@@ -68,8 +68,7 @@ body {
 }
 
 .logo img {
-    
-    height: 70px;
+    height: 90px;
     width: auto;
     transition: all 0.3s ease;
 }
@@ -94,7 +93,7 @@ body {
     color: var(--secondary-color);
     text-decoration: none;
     font-family: var(--font-heading);
-    font-size: 1.1rem;
+    font-size: 1.4rem;
     padding: 0.5rem 1rem;
     position: relative;
     transition: var(--transition);
@@ -375,7 +374,7 @@ body {
 }
 
 .house.Ravenclaw {
-    color: #355ee7;
+    color: #3660e7;
 }
 
 .details-btn {
@@ -494,37 +493,71 @@ body {
     color: var(--secondary-color);
     font-weight: bold;
 }
+
 /* ================= SPELLS ================= */
+.spells-section {
+    background-color: rgba(0, 0, 0, 0.03);
+    border-radius: 8px;
+}
+
+.spells-controls {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.spells-controls input,
+.spells-controls select {
+    padding: 0.75rem 1rem;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+    font-family: var(--font-main);
+    min-width: 250px;
+}
+
 .spells-accordion {
-    max-width: 800px;
+    max-width: 1000px;
     margin: 0 auto;
+    background: var(--bg-color);
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .accordion-item {
     margin-bottom: 1rem;
-    border-radius: 4px;
+    border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background: var(--light-gray);
+    transition: var(--transition);
+}
+
+.accordion-item:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .accordion-btn {
     width: 100%;
-    text-align: left;
     padding: 1.25rem;
-    font-size: 1.1rem;
+    text-align: left;
     border: none;
-    background-color: var(--primary-color);
+    background: var(--primary-color);
     color: white;
     cursor: pointer;
-    transition: var(--transition);
+    font-size: 1.2rem;
+    font-family: var(--font-heading);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-family: var(--font-heading);
+    transition: var(--transition);
 }
 
 .accordion-btn:hover {
-    background-color: #5a0001;
+    background: #5a0001;
 }
 
 .accordion-btn::after {
@@ -534,7 +567,7 @@ body {
 }
 
 .accordion-btn.active {
-    background-color: #5a0001;
+    background: #5a0001;
 }
 
 .accordion-btn.active::after {
@@ -546,56 +579,54 @@ body {
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.3s ease-out;
-    background-color: var(--light-gray);
+    background: var(--bg-color);
 }
 
-.accordion-content.active {
-    max-height: 1000px;
+.accordion-content.show {
+    max-height: 5000px;
     padding: 1rem;
-}
-
-.spells-category-title {
-    color: var(--primary-color);
-    margin-bottom: 1rem;
-    font-size: 1.3rem;
-    border-bottom: 2px solid var(--secondary-color);
-    padding-bottom: 0.5rem;
-    font-family: var(--font-heading);
-}
-
-.spells-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
 }
 
 .spell-item {
-    padding: 0.75rem;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    background: var(--light-gray);
+    border-radius: 8px;
     transition: var(--transition);
-}
-
-.spell-item:last-child {
-    border-bottom: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .spell-item:hover {
-    background-color: rgba(0, 0, 0, 0.03);
-    padding-left: 1rem;
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
-.spell-name {
-    font-weight: bold;
-    display: block;
+.spell-item h4 {
     color: var(--primary-color);
+    margin-bottom: 0.5rem;
     font-family: var(--font-heading);
-    margin-bottom: 0.25rem;
+    font-size: 1.3rem;
+    border-bottom: 2px solid var(--secondary-color);
+    padding-bottom: 0.5rem;
 }
 
-.spell-description {
-    display: block;
+.spell-item p {
     color: var(--text-color);
-    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+}
+
+.spell-item .spell-category {
+    display: inline-block;
+    background-color: var(--secondary-color);
+    color: #000;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-top: 0.5rem;
 }
 
 /* ================= QUIZ ================= */
@@ -756,7 +787,6 @@ textarea.error {
     padding-left: 5px;
 }
 
-/* Nowe style dla przycisków w stopce */
 .footer-btn {
     display: inline-block;
     padding: 0.5rem 1rem;
@@ -779,7 +809,6 @@ textarea.error {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Style dla ikon mediów społecznościowych */
 .social-icons {
     display: flex;
     gap: 1rem;
@@ -825,7 +854,6 @@ textarea.error {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-/* Style dla newslettera w stopce */
 .newsletter-form {
     margin-top: 1rem;
 }
@@ -1056,7 +1084,12 @@ button:disabled, .btn:disabled {
         height: auto;
         max-height: 300px;
     }
+    
+    .accordion-content.show {
+        grid-template-columns: 1fr;
+    }
 }
+
 /* Spójne style dla tytułów sekcji */
 .characters-section h2,
 .houses-section h2,
@@ -1082,6 +1115,7 @@ button:disabled, .btn:disabled {
     background: var(--secondary-color);
     margin: 1rem auto 0;
 }
+
 @media (max-width: 768px) {
     .characters-container {
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -1098,6 +1132,15 @@ button:disabled, .btn:disabled {
     .accordion-btn {
         padding: 1rem;
         font-size: 1rem;
+    }
+    
+    .spells-controls {
+        flex-direction: column;
+    }
+    
+    .spells-controls input,
+    .spells-controls select {
+        width: 100%;
     }
 }
 
@@ -1123,5 +1166,9 @@ button:disabled, .btn:disabled {
     .modal-content {
         width: 95%;
         padding: 1rem;
+    }
+    
+    .spell-item h4 {
+        font-size: 1.1rem;
     }
 }

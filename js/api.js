@@ -66,7 +66,8 @@ async function fetchSpells() {
     for (const category in data.zaklęcia) {
         if (data.zaklęcia.hasOwnProperty(category)) {
             spells = spells.concat(data.zaklęcia[category].map(spell => ({
-                ...spell,
+                name: spell.name,
+                description: spell.description,
                 category: category
             })));
         }
@@ -150,62 +151,55 @@ function displayCharacters(characters) {
 }
 
 function displaySpells(spells) {
-    const accordionItems = document.querySelectorAll('.accordion-item');
-    if (!accordionItems.length) return;
+    const accordionContainer = document.querySelector('.spells-accordion');
+    if (!accordionContainer) return;
 
-    // Grupowanie zaklęć po kategoriach
-    const spellsByCategory = spells.reduce((acc, spell) => {
-        if (!acc[spell.category]) {
-            acc[spell.category] = [];
+    // Najpierw wyczyść istniejące elementy
+    accordionContainer.innerHTML = '';
+
+    // Grupuj zaklęcia według kategorii
+    const spellsByCategory = {};
+    spells.forEach(spell => {
+        if (!spellsByCategory[spell.category]) {
+            spellsByCategory[spell.category] = [];
         }
-        acc[spell.category].push(spell);
-        return acc;
-    }, {});
+        spellsByCategory[spell.category].push(spell);
+    });
 
-    accordionItems.forEach(item => {
-        const btn = item.querySelector('.accordion-btn');
-        const content = item.querySelector('.accordion-content');
+    // Dla każdej kategorii utwórz element accordion
+    for (const category in spellsByCategory) {
+        const accordionItem = document.createElement('div');
+        accordionItem.className = 'accordion-item';
         
-        // Znajdź kategorię pasującą do przycisku
-        const categoryName = btn.textContent.trim();
-        const categorySpells = spellsByCategory[categoryName] || [];
-
-        if (categorySpells.length > 0) {
-            let spellsHTML = `<div class="spells-list">`;
-            
-            categorySpells.forEach(spell => {
-                spellsHTML += `
-                    <div class="spell-item scroll-animation">
-                        <span class="spell-name">${spell.name}</span>
-                        <span class="spell-description">${spell.description}</span>
-                    </div>
-                `;
-            });
-            
-            spellsHTML += `</div>`;
-            content.innerHTML = spellsHTML;
-        } else {
-            content.innerHTML = '<p class="no-results">Brak zaklęć w tej kategorii</p>';
-        }
-    });
-
-    // Inicjalizacja akordeonu
-    const accordionBtns = document.querySelectorAll('.accordion-btn');
-    accordionBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-            this.classList.toggle('active');
-            const content = this.nextElementSibling;
-            
-            if (content.style.maxHeight) {
-                content.style.maxHeight = null;
-                content.classList.remove('active');
-            } else {
-                content.style.maxHeight = content.scrollHeight + "px";
-                content.classList.add('active');
-            }
+        const accordionBtn = document.createElement('button');
+        accordionBtn.className = 'accordion-btn';
+        accordionBtn.textContent = category;
+        
+        const accordionContent = document.createElement('div');
+        accordionContent.className = 'accordion-content';
+        accordionContent.style.display = 'none';
+        
+        spellsByCategory[category].forEach(spell => {
+            const spellElement = document.createElement('div');
+            spellElement.className = 'spell-item scroll-animation';
+            spellElement.innerHTML = `
+                <h4>${spell.name}</h4>
+                <p>${spell.description}</p>
+            `;
+            accordionContent.appendChild(spellElement);
         });
-    });
-
+        
+        accordionItem.appendChild(accordionBtn);
+        accordionItem.appendChild(accordionContent);
+        accordionContainer.appendChild(accordionItem);
+        
+        // Dodaj obsługę kliknięcia
+        accordionBtn.addEventListener('click', () => {
+            accordionBtn.classList.toggle('active');
+            accordionContent.style.display = accordionContent.style.display === 'block' ? 'none' : 'block';
+        });
+    }
+    
     initScrollAnimations();
 }
 
@@ -233,7 +227,7 @@ function showCharacterDetails(characterId) {
                     <p><strong>Data urodzenia:</strong> ${character.dateOfBirth}</p>
                     <p><strong>Pochodzenie:</strong> ${character.ancestry}</p>
                     <p><strong>Patronus:</strong> ${character.patronus}</p>
-                    <p>${character.description}</p>
+
                 </div>
             </div>
             <button class="close-modal-btn">Zamknij</button>
@@ -345,7 +339,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     }
 
-    // Obsługa filtrowania zaklęć po kategorii
+    // Obsługa filtrowania kategorii zaklęć
     if (document.getElementById('spell-category-filter')) {
         document.getElementById('spell-category-filter').addEventListener('change', (e) => {
             const filtered = filterSpells(

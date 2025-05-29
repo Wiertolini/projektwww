@@ -1,5 +1,3 @@
-<!--json-server --watch bazadanych.json --port 3000-->>
-
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -94,57 +92,37 @@
     </section>
 
     <!-- Sekcja zaklęć -->
-
     <section class="spells-section" id="spells">
         <h2>Zaklęcia</h2>
+        <div class="spells-controls">
+            <input type="text" id="spell-search" placeholder="Wyszukaj zaklęcie...">
+            <select id="spell-category-filter">
+                <option value="">Wszystkie kategorie</option>
+                <option value="Podstawowe zaklęcia">Podstawowe</option>
+                <option value="Zaklęcia obronne">Obronne</option>
+                <option value="Zaklęcia lecznicze">Lecznicze</option>
+                <option value="Zaklęcia transportowe">Transportowe</option>
+                <option value="Zaklęcia ofensywne">Ofensywne</option>
+                <option value="Zaklęcia komunikacji i ukrywania">Komunikacja</option>
+                <option value="Zaklęcia transformacji">Transformacje</option>
+                <option value="Zaklęcia niewybaczalne">Niewybaczalne</option>
+                <option value="Inne przydatne zaklęcia">Inne</option>
+            </select>
+        </div>
         <div class="spells-accordion">
-            <div class="accordion-item">
-                <button class="accordion-btn">Podstawowe zaklęcia</button>
-                <div class="accordion-content"></div>
-            </div>
-            <div class="accordion-item">
-                <button class="accordion-btn">Zaklęcia obronne</button>
-                <div class="accordion-content"></div>
-            </div>
-            <div class="accordion-item">
-                <button class="accordion-btn">Zaklęcia lecznicze</button>
-                <div class="accordion-content"></div>
-            </div>
-            <div class="accordion-item">
-                <button class="accordion-btn">Zaklęcia transportowe</button>
-                <div class="accordion-content"></div>
-            </div>
-            <div class="accordion-item">
-                <button class="accordion-btn">Zaklęcia ofensywne</button>
-                <div class="accordion-content"></div>
-            </div>
-            <div class="accordion-item">
-                <button class="accordion-btn">Zaklęcia komunikacji i ukrywania</button>
-                <div class="accordion-content"></div>
-            </div>
-            <div class="accordion-item">
-                <button class="accordion-btn">Zaklęcia transformacji</button>
-                <div class="accordion-content"></div>
-            </div>
-            <div class="accordion-item">
-                <button class="accordion-btn">Zaklęcia niewybaczalne</button>
-                <div class="accordion-content"></div>
-            </div>
-            <div class="accordion-item">
-                <button class="accordion-btn">Inne przydatne zaklęcia</button>
-                <div class="accordion-content"></div>
-            </div>
+            <!-- Tutaj będą dynamicznie dodawane kategorie zaklęć -->
+            <div class="loading-message">Ładowanie zaklęć...</div>
         </div>
     </section>
 
     <!-- Sekcja quizu -->
     <section class="quiz-section scroll-animation" id="quiz">
         <h2>Sprawdź swoją wiedzę</h2>
-    <form id="quiz-form" class="quiz-form">
-        <div id="quiz-questions"></div>
-        <div class="quiz-results" id="quiz-results"></div>
-        <button type="submit" class="submit-btn">Sprawdź odpowiedzi</button>
-    </form>
+        <form id="quiz-form" class="quiz-form">
+            <div id="quiz-questions"></div>
+            <div class="quiz-results" id="quiz-results"></div>
+            <button type="submit" class="submit-btn">Sprawdź odpowiedzi</button>
+        </form>
     </section>
 
     <!-- Sekcja kontaktowa -->

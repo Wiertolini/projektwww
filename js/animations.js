@@ -167,37 +167,7 @@ class AnimationsManager {
         });
     }
 
-    // Animacje akordeonu
-    setupAccordionAnimations() {
-        const accordionBtns = document.querySelectorAll('.accordion-btn');
-        
-        accordionBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const content = btn.nextElementSibling;
-                const isOpen = content.classList.contains('active');
-                
-                // Zamknij wszystkie inne akordeony
-                document.querySelectorAll('.accordion-content').forEach(item => {
-                    if (item !== content) {
-                        item.classList.remove('active');
-                        item.style.maxHeight = null;
-                    }
-                });
-                
-                // Animacja otwierania/zamykania
-                if (isOpen) {
-                    content.classList.remove('active');
-                    content.style.maxHeight = null;
-                } else {
-                    content.classList.add('active');
-                    content.style.maxHeight = content.scrollHeight + 'px';
-                }
-                
-                // Animacja strzałki/ikony
-                btn.classList.toggle('active');
-            });
-        });
-    }
+   
 }
 
 // Inicjalizacja animacji po załadowaniu DOM

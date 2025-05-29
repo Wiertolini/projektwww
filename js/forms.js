@@ -114,9 +114,9 @@ async function initQuiz() {
                 answer: "Eliksiry"
             },
             {
-                question: "Jak nazywa się różdżka Harry'ego Pottera?",
-                options: ["Blackthorn", "Holly", "Elder", "Vine"],
-                answer: "Holly"
+                question: "Jak mieli na imię rodzice Harrego?",
+                options: ["James i Luna", "James i Lily", "Voldemort i Bellatrix", "Fred i Marlena"],
+                answer: "James i Lily"
             },
             {
                 question: "Kto jest opiekunem domu Gryffindor?",
