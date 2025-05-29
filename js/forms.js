@@ -64,15 +64,13 @@ function validateContactForm() {
             };
 
             try {
-                // Symulacja wysłania formularza
+
                 console.log('Form data:', formData);
                 await new Promise(resolve => setTimeout(resolve, 1000));
-                
-                // Pokazanie komunikatu sukcesu
+
                 alert('Dziękujemy za wiadomość! Odezwiemy się wkrótce.');
                 form.reset();
-                
-                // Zapisz w localStorage
+
                 const submissions = JSON.parse(localStorage.getItem('contactSubmissions') || '[]');
                 submissions.push(formData);
                 localStorage.setItem('contactSubmissions', JSON.stringify(submissions));
@@ -83,7 +81,6 @@ function validateContactForm() {
         }
     });
 
-    // Live validation
     nameInput.addEventListener('input', () => clearError(nameInput));
     emailInput.addEventListener('input', () => clearError(emailInput));
     messageInput.addEventListener('input', () => clearError(messageInput));
@@ -96,7 +93,6 @@ async function initQuiz() {
     if (!quizForm || !quizQuestionsContainer) return;
 
     try {
-        // Domyślne pytania (na wypadek gdyby API nie działało)
         const defaultQuestions = [
             {
                 question: "Kto jest dyrektorem Hogwartu na początku serii?",

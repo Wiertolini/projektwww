@@ -1,4 +1,4 @@
-// animations.js
+
 class AnimationsManager {
     constructor() {
         this.initScrollAnimations();
@@ -68,8 +68,6 @@ class AnimationsManager {
                 button.style.transform = 'scale(1)';
                 button.style.opacity = '1';
             });
-
-            // Efekt "pulsowania" dla CTA button
             if (button.classList.contains('cta-button')) {
                 setInterval(() => {
                     button.style.boxShadow = '0 0 0 0 rgba(245, 197, 66, 0.7)';
