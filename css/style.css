@@ -893,7 +893,7 @@ textarea.error {
     font-size: 0.875rem;
 }
 
-/* Poprawki dla spójności przycisków w całej aplikacji */
+
 button, .btn {
     padding: 0.75rem 1.5rem;
     border-radius: 4px;
@@ -1094,7 +1094,7 @@ button:disabled, .btn:disabled {
     }
 }
 
-/* Spójne style dla tytułów sekcji */
+
 .characters-section h2,
 .houses-section h2,
 .spells-section h2,
