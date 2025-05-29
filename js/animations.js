@@ -7,7 +7,7 @@ class AnimationsManager {
         this.setupParallax();
         this.setupHoverAnimations();
         this.setupHouseCardsAnimations();
-        this.setupAccordionAnimations();
+
     }
 
     // Animacje przy scrollowaniu

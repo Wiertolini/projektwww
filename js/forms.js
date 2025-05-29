@@ -127,18 +127,7 @@ async function initQuiz() {
 
         let questions = defaultQuestions;
 
-        // Spróbuj pobrać pytania z API
-        try {
-            const response = await fetch('https://hp-api.onrender.com/api/questions');
-            if (response.ok) {
-                const apiQuestions = await response.json();
-                if (apiQuestions.length > 0) {
-                    questions = apiQuestions.slice(0, 5);
-                }
-            }
-        } catch (apiError) {
-            console.log('Używam domyślnych pytań quizu', apiError);
-        }
+
 
         // Wygeneruj HTML dla pytań
         quizQuestionsContainer.innerHTML = questions.map((question, index) => `

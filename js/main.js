@@ -38,7 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
             menuToggle.setAttribute('aria-expanded', navMenu.classList.contains('active'));
         });
 
-        // Zamknij menu po kliknięciu linku
         document.querySelectorAll('.nav-menu a').forEach(link => {
             link.addEventListener('click', () => {
                 menuToggle.classList.remove('active');
@@ -103,7 +102,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initTheme();
     initMobileMenu();
     initSmoothScroll();
-    initSpellsAccordion();
     initScrollAnimations();
     initNavbarScrollEffect();
 });

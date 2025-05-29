@@ -133,6 +133,61 @@
       "obraz": "https://ik.imagekit.io/hpapi/draco.jpg"
     },
     {
+  "imię": "Cedric Diggory",
+  "pseudonimy": [],
+  "płeć": "mężczyzna",
+  "gatunek": "człowiek",
+  "dom": "Hufflepuff",
+  "rok_urodzenia": 1977,
+  "czarodziej": true,
+  "pochodzenie": "",
+  "oczy": "szare",
+  "włosy": "brązowe",
+  "różdżka": "jesion, włos jednorożca, 12.25 cala",
+  "patronus": "",
+  "uczeń_hogwartu": true,
+  "pracownik_hogwartu": false,
+  "aktor": "Robert Pattinson",
+  "żyje": false,
+  "obraz": "https://ik.imagekit.io/hpapi/cedric.png"
+},
+{
+  "imię": "Horace Slughorn",
+  "pseudonimy": [],
+  "płeć": "mężczyzna",
+  "gatunek": "człowiek",
+  "dom": "Slytherin",
+  "czarodziej": true,
+  "pochodzenie": "czysta krew",
+  "oczy": "zielone",
+  "włosy": "blond",
+  "różdżka": "cedr, smocze serce, 10.25 cala",
+  "patronus": "",
+  "uczeń_hogwartu": false,
+  "pracownik_hogwartu": true,
+  "aktor": "Jim Broadbent",
+  "żyje": true,
+  "obraz": "https://ik.imagekit.io/hpapi/slughorn.JPG"
+},
+{
+  "imię": "Gregory Goyle",
+  "pseudonimy": [],
+  "płeć": "mężczyzna",
+  "gatunek": "człowiek",
+  "dom": "Slytherin",
+  "czarodziej": true,
+  "pochodzenie": "czysta krew",
+  "oczy": "",
+  "włosy": "brązowe",
+  "różdżka": "",
+  "patronus": "",
+  "uczeń_hogwartu": true,
+  "pracownik_hogwartu": false,
+  "aktor": "Josh Herdman",
+  "żyje": true,
+  "obraz": "https://ik.imagekit.io/hpapi/goyle.jpg"
+},
+    {
       "imię": "Sirius Black",
       "pseudonimy": ["Łapa", "Snuffles"],
       "płeć": "mężczyzna",
@@ -281,42 +336,7 @@
       "żyje": true,
       "obraz": "https://ik.imagekit.io/hpapi/cho.jpg"
     },
-    {
-      "imię": "Fred Weasley",
-      "płeć": "mężczyzna",
-      "gatunek": "człowiek",
-      "dom": "Gryffindor",
-      "data_urodzenia": "",
-      "czarodziej": true,
-      "pochodzenie": "czysta krew",
-      "oczy": "",
-      "włosy": "rude",
-      "różdżka": "",
-      "patronus": "",
-      "uczeń_hogwartu": true,
-      "pracownik_hogwartu": false,
-      "aktor": "James Phelps",
-      "żyje": false,
-      "obraz": ""
-    },
-    {
-      "imię": "George Weasley",
-      "płeć": "mężczyzna",
-      "gatunek": "człowiek",
-      "dom": "Gryffindor",
-      "data_urodzenia": "",
-      "czarodziej": true,
-      "pochodzenie": "czysta krew",
-      "oczy": "",
-      "włosy": "rude",
-      "różdżka": "",
-      "patronus": "",
-      "uczeń_hogwartu": true,
-      "pracownik_hogwartu": false,
-      "aktor": "Oliver Phelps",
-      "żyje": true,
-      "obraz": ""
-    },
+    
     {
       "imię": "Dolores Umbridge",
       "płeć": "kobieta",
@@ -334,8 +354,7 @@
       "aktor": "Imelda Staunton",
       "żyje": true,
       "obraz": "https://ik.imagekit.io/hpapi/umbridge.jpg"
-    },
-    {
+    },{
       "imię": "Minerva McGonagall",
       "płeć": "kobieta",
       "gatunek": "człowiek",
@@ -353,6 +372,46 @@
       "żyje": true,
       "obraz": "https://ik.imagekit.io/hpapi/mcgonagall.jpg"
     },
+{
+  "imię": "Argus Filch",
+  "pseudonimy": [],
+  "płeć": "mężczyzna",
+  "gatunek": "człowiek",
+  "dom": "",
+  "czarodziej": false,
+  "pochodzenie": "charłak",
+  "oczy": "",
+  "włosy": "szare",
+  "różdżka": "",
+  "patronus": "",
+  "uczeń_hogwartu": false,
+  "pracownik_hogwartu": true,
+  "aktor": "David Bradley",
+  "żyje": true,
+  "obraz": "https://ik.imagekit.io/hpapi/filch.jpg"
+},
+  {
+  "imię": "Arthur Weasley",
+  "pseudonimy": [],
+  "płeć": "mężczyzna",
+  "gatunek": "człowiek",
+  "dom": "Gryffindor",
+  "data_urodzenia": "06-02-1950",
+  "rok_urodzenia": 1950,
+  "czarodziej": true,
+  "pochodzenie": "czysta krew",
+  "oczy": "niebieskie",
+  "włosy": "rude",
+  "różdżka": "",
+  "patronus": "łasica",
+  "uczeń_hogwartu": false,
+  "pracownik_hogwartu": false,
+  "aktor": "Mark Williams",
+  "żyje": true,
+  "obraz": "https://ik.imagekit.io/hpapi/arthur.jpg"
+}
+,
+    
     {
       "imię": "Lucjusz Malfoy",
       "pseudonimy": [],
@@ -437,7 +496,7 @@
         "description": "Tworzy niewidzialną tarczę ochronną"
       },
       {
-        "name": "Stupefy",
+        "name": "Drętwota",
         "description": "Ogłusza przeciwnika"
       },
       {

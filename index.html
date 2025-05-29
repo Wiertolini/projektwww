@@ -18,7 +18,7 @@
         <nav class="navbar">
             <div class="logo">
                 <img src="zdj/logo.png" alt="Logo Harry Potter" width="60">
-                <span>Harry Potter</span>
+
             </div>
             <button class="menu-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-menu">
                 <span></span><span></span><span></span>
@@ -110,7 +110,6 @@
             </select>
         </div>
         <div class="spells-accordion">
-            <!-- Tutaj będą dynamicznie dodawane kategorie zaklęć -->
             <div class="loading-message">Ładowanie zaklęć...</div>
         </div>
     </section>
@@ -184,23 +183,22 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2023 Świat Harry'ego Pottera. Wszelkie prawa zastrzeżone.</p>
+            <p>&copy; 2025 Świat Harry'ego Pottera. Wszelkie prawa zastrzeżone.</p>
         </div>
     </footer>
 
-    <!-- Modal -->
-    <div class="modal" id="character-modal">
+    <!-- MODAL: Szczegóły postaci -->
+    <div id="character-modal" class="modal">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
-            <div class="modal-body" id="modal-body"></div>
+            <div id="modal-body"></div>
         </div>
     </div>
 
-    <!-- Scripts -->
+    <!-- Skrypty -->
     <script src="js/api.js" defer></script>
     <script src="js/forms.js" defer></script>
     <script src="js/main.js" defer></script>
     <script src="js/animations.js" defer></script>
-    
 </body>
 </html>
