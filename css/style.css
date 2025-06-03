@@ -273,11 +273,9 @@ body {
 
 .characters-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(240px, max-content));
     gap: 2rem;
-    max-width: 1400px; 
-    margin: 0 auto;
-    padding: 2rem;
+    justify-content: center;
 }
 
 .character-card {
@@ -287,6 +285,7 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: var(--transition);
     text-align: center;
+    
 }
 
 .character-card:hover {
@@ -296,11 +295,20 @@ body {
 
 .character-image {
     width: 100%;
-    height: 300px;
+    height: 100%;
     object-fit: cover;
+    object-position: top;
     border-bottom: 3px solid var(--secondary-color);
+    transition: var(--transition);
 }
-
+.character-image-container {
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .character-info {
     padding: 1.5rem;
     text-align: left;
@@ -1122,7 +1130,9 @@ button:disabled, .btn:disabled {
 
 @media (max-width: 768px) {
     .characters-container {
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 2rem;
     }
     
     .house-carousel {

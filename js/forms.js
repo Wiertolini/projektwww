@@ -1,4 +1,3 @@
-
 // Funkcje pomocnicze
 function showError(input, message) {
     const errorElement = input.nextElementSibling;
@@ -64,7 +63,6 @@ function validateContactForm() {
             };
 
             try {
-
                 console.log('Form data:', formData);
                 await new Promise(resolve => setTimeout(resolve, 1000));
 
@@ -93,7 +91,7 @@ async function initQuiz() {
     if (!quizForm || !quizQuestionsContainer) return;
 
     try {
-        const defaultQuestions = [
+        const questions = [
             {
                 question: "Kto jest dyrektorem Hogwartu na początku serii?",
                 options: ["Albus Dumbledore", "Minerva McGonagall", "Severus Snape", "Dolores Umbridge"],
@@ -120,10 +118,6 @@ async function initQuiz() {
                 answer: "Minerva McGonagall"
             }
         ];
-
-        let questions = defaultQuestions;
-
-
 
         // Wygeneruj HTML dla pytań
         quizQuestionsContainer.innerHTML = questions.map((question, index) => `
