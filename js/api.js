@@ -3,6 +3,7 @@ let allCharacters = [];
 let allSpells = [];
 let currentSort = 'asc';
 
+// Pobiera dane z pliku JSON
 async function fetchData() {
     try {
         const response = await fetch('bazadanych.json');
@@ -15,6 +16,7 @@ async function fetchData() {
     }
 }
 
+// Przetwarza dane postaci z JSONa
 async function fetchCharacters() {
     const data = await fetchData();
     if (!data || !data.postacie) return [];
@@ -48,6 +50,7 @@ async function fetchCharacters() {
     });
 }
 
+// Przetwarza dane zaklęć z JSONa
 async function fetchSpells() {
     const data = await fetchData();
     if (!data || !data.zaklęcia) return [];
@@ -65,6 +68,7 @@ async function fetchSpells() {
     return spells;
 }
 
+// Filtruje i sortuje postaci
 function filterAndSortCharacters(characters, searchTerm, houseFilter, sortOrder) {
     if (!characters || !Array.isArray(characters)) return [];
     return [...characters]
@@ -79,6 +83,7 @@ function filterAndSortCharacters(characters, searchTerm, houseFilter, sortOrder)
         });
 }
 
+// Filtruje zaklęcia
 function filterSpells(spells, searchTerm, categoryFilter) {
     if (!spells || !Array.isArray(spells)) return [];
 
@@ -89,6 +94,7 @@ function filterSpells(spells, searchTerm, categoryFilter) {
     });
 }
 
+// Wyświetla postaci w kontenerze
 function displayCharacters(characters) {
     const container = document.getElementById('characters-container');
     if (!container) return;
@@ -130,6 +136,7 @@ function displayCharacters(characters) {
     initScrollAnimations();
 }
 
+// Wyświetla zaklęcia w akordeonie
 function displaySpells(spells) {
     const accordionContainer = document.querySelector('.spells-accordion');
     if (!accordionContainer) return;
@@ -174,6 +181,7 @@ function displaySpells(spells) {
     initScrollAnimations();
 }
 
+// Pokazuje szczegóły postaci w modalnym oknie
 function showCharacterDetails(characterId) {
     try {
         const character = allCharacters.find(c => c.id === characterId);
@@ -221,6 +229,7 @@ function showCharacterDetails(characterId) {
     }
 }
 
+// Wyświetla komunikat o błędzie
 function showErrorModal(message) {
     const errorModal = document.createElement('div');
     errorModal.className = 'error-modal';
@@ -237,6 +246,7 @@ function showErrorModal(message) {
     });
 }
 
+// Inicjalizuje animacje przewijania
 function initScrollAnimations() {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -250,6 +260,7 @@ function initScrollAnimations() {
     document.querySelectorAll('.scroll-animation').forEach(el => observer.observe(el));
 }
 
+// Inicjalizuje aplikację po załadowaniu DOM
 document.addEventListener('DOMContentLoaded', async () => {
     allCharacters = await fetchCharacters();
     displayCharacters(allCharacters);
