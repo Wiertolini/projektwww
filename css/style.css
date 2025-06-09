@@ -504,7 +504,7 @@ body {
     font-weight: bold;
 }
 
-/* ... (pozostałe style bez zmian) */
+
 
 /* ================= SPELLS ================= */
 .spells-section {
@@ -588,7 +588,7 @@ body {
     background: var(--bg-color);
 }
 
-/* ✅ KLUCZOWA POPRAWKA – zapewnia widoczność */
+
 .accordion-content.show {
     max-height: 5000px;
     padding: 1rem;
